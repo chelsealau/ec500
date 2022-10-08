@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Redis Adapter </title>
+  </head>
+
+  <body>
+    <h1> Welcome to EC500 Redis Server </h1>
+    <script type="text/javascript" src="https://github.com/blueimp/JavaScript-MD5/blob/master/js/md5.js"></script>
+
+    <script type="text/javascript">
+      function pwd_handler(form) {
+        if (form.password.value != '') {
+          form.md5password.value = md5(form.password.value);
+          form.password.value = '';
+        }
+      }
+    </script>
+
+    <form action="https://agile.bu.edu/ec500_scripts/redis.php" method="get" onsubmit="pwd_handler(this);">
+      Password: <input type="password" name="password" placeholder="Enter Password" />
+      <input type="hidden" name="md5password" value="" />
+      <input type="submit" value="Log in" />
+    </form>
+  </body>
+
+</html>
