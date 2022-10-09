@@ -1,14 +1,17 @@
 'use strict';
 
 const makeRequest = async () => {
-    var data = {"salt" : "foo", "hash" : "6b42ab06735a817a46e7637577ca543e", "message" : "ping" };
+    var mess = document.getElementById("message").outerHTML;
+    console.log(mess.valueOf());
+    var data = {"salt" : "foo", "hash" : "6b42ab06735a817a46e7637577ca543e", "message" : mess };
     var url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
     var searchParams = new URLSearchParams(data);
     url.search = searchParams.toString();
     const response = await fetch(url);
     if (response.ok) {
         let text = await response.text();
-        console.log(text);
+        console.log(url);
+        document.getElementById("response").innerHTML = text;
     } else {
         alert("HTTP-ERROR: " + response.status);
     }
@@ -35,7 +38,7 @@ const makeRequest = async () => {
 // }
 
 
-makeRequest();
+// makeRequest();
 
 //A73397CF210AE
 
