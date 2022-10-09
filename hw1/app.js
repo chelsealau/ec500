@@ -7,6 +7,7 @@ document.getElementById("message")
         document.getElementById("message").value = "";
     }
 });
+
 const makeRequest = async () => {
     salt_Password();
     md5();
@@ -22,14 +23,12 @@ const makeRequest = async () => {
     if (response.ok) {
         var text = await response.text();
         console.log(text);
-        // document.getElementById("response").innerHTML = text;
+        document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + text + "<br />";
     } else {
         var text = "HTTP-ERROR: " + response.status;
     }
     text = text.split("Result:");
     const result = text[text.length-1]
-    document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + result + "<br />";
-    // document.getElementById("response").innerHTML = result;
 }
 
 function salt_Password() {
