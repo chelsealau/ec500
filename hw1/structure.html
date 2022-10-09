@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="app.js"></script>  
+    <!-- <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EC500_HW1</title>
+    <link rel="stylesheet" href="main.css"> -->
+  </head>
+  <body>
+    <h1> Welcome to EC500 Redis Server </h1>   
+      <p><span hidden type="hidden" id="password">"A73397CF210AE"</span></p>
+      <p><span hidden type="hidden" id="salt">""</span></p>
+      <p><span hidden type="hidden" id="md5_password">""</span></p>
+      <p>Message: <input type="text" id="message"/> 
+        <input type="button" onclick="send_message()" id="sendmessageButton" value="send"/></p>
+        Response: <span type="text" id="response"></span>
+  </body>
+</html>
