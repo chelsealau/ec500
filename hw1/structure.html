@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EC500_HW1</title>
-    <link rel="stylesheet" href="main.css"> -->
+    <link rel="stylesheet" href="main.css">
   </head>
-  <style>
+  <!-- <style>
     div {
       width: 320px;
       padding: 10px;
@@ -15,9 +15,10 @@
       margin: 0;
       overflow:auto;
     }
-    </style>
+    </style> -->
   <body>
-    <h1> Welcome to EC500 Redis Server </h1>   
+    <h1> WELCOME TO EC500 REDIS SERVER </h1>   
+    <h2> - Group 6 - </h2>
       <p><span hidden type="hidden" id="password">A73397CF210AE</span></p>
       <p><span hidden type="hidden" id="salt"></span></p>
       <p><span hidden type="hidden" id="md5_password"></span></p>
@@ -25,7 +26,7 @@
         <input type="button" onclick="makeRequest()" id="sendmessageButton" value="send"/></p>
       <p><span hidden type="text" id="response"> </span></p> 
       
-      <p><div id="historyBox" style="height:200px;width:400px;overflow:auto;border:8px solid gray;padding:2%">
+      <p><div id="historyBox">
         <span type="text" id="history"></span></div></p>
         <!-- <span type="text" id="response"></span> -->
         <p><input type="button" onclick="clearHistory()" id="clearHistory" value="clear"/></p>
