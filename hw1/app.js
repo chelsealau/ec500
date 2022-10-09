@@ -1,35 +1,41 @@
-// makeRequest 
-// var data = {"salt" : "foo", "hash" : "6b42ab06735a817a46e7637577ca543e", "message" : "ping" };
-// var url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
-// for (let d in data) {
-//     url.searchParams.append(d, data[d])
-// }
-// fetch(url).then(data => {
-//     return data.json();
-// })
-// .then(json => console.log("RESPONSE FROM SERVER", json));
-
+'use strict';
 
 const makeRequest = async () => {
     var data = {"salt" : "foo", "hash" : "6b42ab06735a817a46e7637577ca543e", "message" : "ping" };
     var url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
-    for (let d in data) {
-        url.searchParams.append(d, data[d])
-    }
+    var searchParams = new URLSearchParams(data);
+    url.search = searchParams.toString();
     const response = await fetch(url);
-    const json = await response.json();
-    console.log(json);
+    if (response.ok) {
+        let text = await response.text();
+        console.log(text);
+    } else {
+        alert("HTTP-ERROR: " + response.status);
+    }
 }
 
-makeRequest();
-// console.log("hi there");
+// const makeRequest = async () => {
+//     var url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
+//     const response = await fetch(url, {
+//         'method': "GET",
+//         "headers": {
+//             'salt':'foo',
+//             'hash':'6b42ab06735a817a46e7637577ca543e',
+//             'message':'ping'
+//         }
+//     });
+//     if (response.ok) {
+//         console.log(response);
+//         // let json = await response.json();
+//         // console.log(json);
+//         // console.log("SHOULD HAVE RESPONSE");
+//     } else {
+//         alert("HTTP-ERROR: " + response.status);
+//     }
+// }
 
-// var printStuff = function(){
-//     var myVariable = 5 + 5;
-//     console.log(myVariable);
-//   }
-  
-//   printStuff();
+
+makeRequest();
 
 //A73397CF210AE
 
@@ -44,5 +50,5 @@ makeRequest();
 
 /** REFERENCES:
  * https://code-boxx.com/javascript-fetch-get-query-params/
- * 
+ * https://stackoverflow.com/questions/61240305/reactjs-typeerror-failed-to-execute-fetch-on-window-invalid-name
  */
