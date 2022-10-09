@@ -22,13 +22,13 @@ const makeRequest = async () => {
     const response = await fetch(url);
     if (response.ok) {
         var text = await response.text();
-        console.log(text);
-        document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + text + "<br />";
+        // console.log(text);
     } else {
         var text = "HTTP-ERROR: " + response.status;
     }
     text = text.split("Result:");
     const result = text[text.length-1]
+    document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + result + "<br />";
 }
 
 function salt_Password() {
