@@ -6,19 +6,21 @@ const makeRequest = async () => {
     var js_mess = document.getElementById("message").value;
     var js_salt = document.getElementById("salt").innerText;
     var js_hash = document.getElementById("md5_password").innerText;
-    console.log(js_salt, js_hash, js_mess);
+    // console.log(js_salt, js_hash, js_mess);
     var data = {"salt" : js_salt, "hash" : js_hash, "message" : js_mess };
     var url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
     var searchParams = new URLSearchParams(data);
     url.search = searchParams.toString();
     const response = await fetch(url);
     if (response.ok) {
-        let text = await response.text();
-        console.log(text);
-        document.getElementById("response").innerHTML = text;
+        console.log(response);
+        var text = await response.text();
     } else {
-        alert("HTTP-ERROR: " + response.status);
+        var text = "HTTP-ERROR: " + response.status;
     }
+    text = text.split("Result:");
+    const result = text[text.length-1]
+    document.getElementById("response").innerHTML = result;
 }
 
 // const makeRequest = async () => {
@@ -131,4 +133,5 @@ function md5() {
 /** REFERENCES:
  * https://code-boxx.com/javascript-fetch-get-query-params/
  * https://stackoverflow.com/questions/61240305/reactjs-typeerror-failed-to-execute-fetch-on-window-invalid-name
+ * https://stackoverflow.com/questions/11563638/how-do-i-get-the-value-of-text-input-field-using-javascript
  */
