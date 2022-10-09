@@ -7,6 +7,15 @@
     <title>EC500_HW1</title>
     <link rel="stylesheet" href="main.css"> -->
   </head>
+  <style>
+    div {
+      width: 320px;
+      padding: 10px;
+      border: 5px solid gray;
+      margin: 0;
+      overflow:auto;
+    }
+    </style>
   <body>
     <h1> Welcome to EC500 Redis Server </h1>   
       <p><span hidden type="hidden" id="password">A73397CF210AE</span></p>
@@ -14,7 +23,11 @@
       <p><span hidden type="hidden" id="md5_password"></span></p>
       <p>Message: <input type="text" id="message"/> 
         <input type="button" onclick="makeRequest()" id="sendmessageButton" value="send"/></p>
-        Response: <span type="text" id="response"> </span>
+      <p>Response: <span type="text" id="response"> </span></p> 
+      
+      <p><div class="center" style="height:200px;width:400px;overflow:auto;border:8px solid gray;padding:2%">
+        <span type="text" id="history"></span></div></p>
+        <p><input type="button" onclick="clearHistory()" id="clearHistory" value="clear"/></p>
   </body>
   <script src="app.js"></script>  
 </html>

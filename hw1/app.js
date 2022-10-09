@@ -1,5 +1,11 @@
 'use strict';
-
+document.getElementById("message")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("sendmessageButton").click();
+    }
+});
 const makeRequest = async () => {
     salt_Password();
     md5();
@@ -13,8 +19,10 @@ const makeRequest = async () => {
     url.search = searchParams.toString();
     const response = await fetch(url);
     if (response.ok) {
-        console.log(response);
-        var text = await response.text();
+        let text = await response.text();
+        console.log(text);
+        document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + text + "<br />";
+        document.getElementById("response").innerHTML = text;
     } else {
         var text = "HTTP-ERROR: " + response.status;
     }
@@ -22,39 +30,6 @@ const makeRequest = async () => {
     const result = text[text.length-1]
     document.getElementById("response").innerHTML = result;
 }
-
-// const makeRequest = async () => {
-//     var url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
-//     const response = await fetch(url, {
-//         'method': "GET",
-//         "headers": {
-//             'salt':'foo',
-//             'hash':'6b42ab06735a817a46e7637577ca543e',
-//             'message':'ping'
-//         }
-//     });
-//     if (response.ok) {
-//         console.log(response);
-//         // let json = await response.json();
-//         // console.log(json);
-//         // console.log("SHOULD HAVE RESPONSE");
-//     } else {
-//         alert("HTTP-ERROR: " + response.status);
-//     }
-// }
-
-
-// makeRequest();
-
-//A73397CF210AE
-
-// fetch('https://agile.bu.edu/ec500_scripts/redis.php')
-
-
-// let http = new XMLHttpRequest();
-// http.open("GET", "https://agile.bu.edu/ec500_scripts/redis.php");
-// http.send();
-// http.onload = () => console.log(http.responseText);
 
 function salt_Password() {
     const n = 32;
@@ -125,10 +100,9 @@ function md5() {
     document.getElementById("md5_password").innerHTML = rh(a)+rh(b)+rh(c)+rh(d);
 }
 
-// function send_message(){
-//     salt_Password();
-//     md5();
-// };
+function clearHistory(){
+    document.getElementById("history").innerHTML = "";
+}
 
 /** REFERENCES:
  * https://code-boxx.com/javascript-fetch-get-query-params/
