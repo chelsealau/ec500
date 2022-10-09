@@ -29,6 +29,8 @@ const makeRequest = async () => {
     text = text.split("Result:");
     const result = text[text.length-1]
     document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + result + "<br />";
+    var objDiv = document.getElementById("historyBox");
+    objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 function salt_Password() {
