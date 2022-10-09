@@ -4,6 +4,7 @@ document.getElementById("message")
     event.preventDefault();
     if (event.keyCode === 13) {
         document.getElementById("sendmessageButton").click();
+        document.getElementById("message").value = "";
     }
 });
 const makeRequest = async () => {
