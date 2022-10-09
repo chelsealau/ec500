@@ -55,7 +55,6 @@ const makeRequest = async () => {
 // http.onload = () => console.log(http.responseText);
 
 function salt_Password() {
-    let password = document.getElementById("password").innerHTML;
     const n = 32;
     var lettersSetArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", 
                         "r", "s", "t", "u", "v", "w", "x", "y", "z"];
