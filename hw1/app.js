@@ -19,16 +19,16 @@ const makeRequest = async () => {
     url.search = searchParams.toString();
     const response = await fetch(url);
     if (response.ok) {
-        let text = await response.text();
+        var text = await response.text();
         console.log(text);
-        document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + text + "<br />";
-        document.getElementById("response").innerHTML = text;
+        // document.getElementById("response").innerHTML = text;
     } else {
         var text = "HTTP-ERROR: " + response.status;
     }
     text = text.split("Result:");
     const result = text[text.length-1]
-    document.getElementById("response").innerHTML = result;
+    document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + result + "<br />";
+    // document.getElementById("response").innerHTML = result;
 }
 
 function salt_Password() {
