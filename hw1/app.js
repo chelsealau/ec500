@@ -1,16 +1,20 @@
 'use strict';
 
 const makeRequest = async () => {
-    var mess = document.getElementById("message").outerHTML;
-    console.log(mess.valueOf());
-    var data = {"salt" : "foo", "hash" : "6b42ab06735a817a46e7637577ca543e", "message" : mess };
+    salt_Password();
+    md5();
+    var js_mess = document.getElementById("message").value;
+    var js_salt = document.getElementById("salt").innerText;
+    var js_hash = document.getElementById("md5_password").innerText;
+    console.log(js_salt, js_hash, js_mess);
+    var data = {"salt" : js_salt, "hash" : js_hash, "message" : js_mess };
     var url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
     var searchParams = new URLSearchParams(data);
     url.search = searchParams.toString();
     const response = await fetch(url);
     if (response.ok) {
         let text = await response.text();
-        console.log(url);
+        console.log(text);
         document.getElementById("response").innerHTML = text;
     } else {
         alert("HTTP-ERROR: " + response.status);
@@ -77,7 +81,7 @@ function salt_Password() {
 //  Original copyright (c) Paul Johnston & Greg Holt.
 //  The function itself is now 42 lines long.
 function md5() {
-    inputString = document.getElementById("salt").innerHTML + document.getElementById("password").innerHTML 
+    var inputString = document.getElementById("salt").innerHTML + document.getElementById("password").innerHTML 
     var hc="0123456789abcdef";
     function rh(n) {var j,s="";for(j=0;j<=3;j++) s+=hc.charAt((n>>(j*8+4))&0x0F)+hc.charAt((n>>(j*8))&0x0F);return s;}
     function ad(x,y) {var l=(x&0xFFFF)+(y&0xFFFF);var m=(x>>16)+(y>>16)+(l>>16);return (m<<16)|(l&0xFFFF);}
@@ -120,10 +124,10 @@ function md5() {
     document.getElementById("md5_password").innerHTML = rh(a)+rh(b)+rh(c)+rh(d);
 }
 
-function send_message(){
-    salt_Password();
-    md5();
-};
+// function send_message(){
+//     salt_Password();
+//     md5();
+// };
 
 /** REFERENCES:
  * https://code-boxx.com/javascript-fetch-get-query-params/
