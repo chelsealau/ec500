@@ -16,7 +16,7 @@ document.getElementById("password")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.keyCode === 13) {
-        document.getElementById("loginBotton").click();
+        document.getElementById("loginButton").click();
         document.getElementById("password").value="";
         document.getElementById("username").value = "";
         document.getElementById("fail_login").style.display = "contents";
