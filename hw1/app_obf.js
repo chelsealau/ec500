@@ -17,6 +17,7 @@ document.getElementById("password")
     event.preventDefault();
     if (event.keyCode === 13) {
         document.getElementById("loginButton").click();
+        
     }
 });
 
@@ -28,34 +29,15 @@ document.getElementById("username")
     }
 });
 
-document.getElementById("loginButton").addEventListener("click", try_login);
-
-function try_login(){
-    document.getElementById("hi_username").innerHTML = document.getElementById("username").value;
-}
-
 const makeRequest = async () => {
-    salt_Password();
-    md5();
-    var js_mess = document.getElementById("message").value;
-    var js_salt = document.getElementById("salt").innerText;
-    var js_hash = document.getElementById("md5_password").innerText;
-    var url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
-    var searchParams = new URLSearchParams({"salt" : js_salt, "hash" : js_hash, "message" : js_mess });
+    salt_Password(), md5();
+    var js_mess = document.getElementById("message").value, js_salt = document.getElementById("salt").innerText, js_hash = document.getElementById("md5_password").innerText, url = new URL("https://agile.bu.edu/ec500_scripts/redis.php"),searchParams = new URLSearchParams({"salt" : js_salt, "hash" : js_hash, "message" : js_mess});
     url.search = searchParams.toString();
     const response = await fetch(url);
-    var text = (response.ok?await response.text():"HTTP-ERROR: "+response.status).split("Result:");
-    const result = text[text.length-1];
+    var text = ((response.ok)?await response.text():"HTTP-ERROR: "+response.status).split("Result:");
+    const result = text[text.length-1]
     document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + result + "<br />";
-    if (document.getElementById("login_screen").style.display == "contents" && result){
-        clearHistory();
-        var login_screen = document.getElementById("login_screen");
-        var server_screen = document.getElementById("server_screen");
-        login_screen.style.display = "none"
-        server_screen.style.display = "contents"
-    }else if(document.getElementById("login_screen").style.display){
-        document.getElementById("fail_login").style.display = "contents";
-    }
+    ((document.getElementById("login_screen").style.display == "contents" && result)?(clearHistory(),document.getElementById("login_screen").style.display = "none", document.getElementById("server_screen").style.display = "contents",document.getElementById("hi_username").innerHTML = document.getElementById("username").value):((document.getElementById("login_screen").style.display)?document.getElementById("fail_login").style.display = "contents":null));
     document.getElementById("historyBox").scrollTop = document.getElementById("historyBox").scrollHeight;
 }
 
