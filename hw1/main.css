@@ -87,7 +87,6 @@ h3 {
   color: #332f24;
   font-size: larger;
   font-family: monospace;
-  overflow-y: scroll;
 }
 
 #message {
