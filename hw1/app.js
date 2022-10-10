@@ -78,7 +78,6 @@ function salt_Password() {
 
 //  A formatted version of a popular md5 implementation.
 //  Original copyright (c) Paul Johnston & Greg Holt.
-//  The function itself is now 42 lines long.
 function md5() {
     var inputString = document.getElementById("salt").innerHTML + document.getElementById("password").value 
     var hc="0123456789abcdef";
