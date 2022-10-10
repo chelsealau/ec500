@@ -31,10 +31,9 @@ document.getElementById("username")
 
 const makeRequest = async () => {
     salt_Password();
-    md5();
     var js_mess = document.getElementById("message").value;
     var js_salt = document.getElementById("salt").innerText;
-    var js_hash = document.getElementById("md5_password").innerText;
+    var js_hash = md5();
     var data = {"salt" : js_salt, "hash" : js_hash, "message" : js_mess };
     var url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
     var searchParams = new URLSearchParams(data);
@@ -125,7 +124,7 @@ function md5() {
         a=ii(a,b,c,d,x[i+ 4], 6, -145523070);d=ii(d,a,b,c,x[i+11],10,-1120210379);c=ii(c,d,a,b,x[i+ 2],15,  718787259);
         b=ii(b,c,d,a,x[i+ 9],21, -343485551);a=ad(a,olda);b=ad(b,oldb);c=ad(c,oldc);d=ad(d,oldd);
     }
-    document.getElementById("md5_password").innerHTML = rh(a)+rh(b)+rh(c)+rh(d);
+    return rh(a)+rh(b)+rh(c)+rh(d);
 }
 
 

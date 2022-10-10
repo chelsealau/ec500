@@ -30,8 +30,8 @@ document.getElementById("username")
 });
 
 const makeRequest = async () => {
-    salt_Password(), md5();
-    var js_mess = document.getElementById("message").value, js_salt = document.getElementById("salt").innerText, js_hash = document.getElementById("md5_password").innerText, url = new URL("https://agile.bu.edu/ec500_scripts/redis.php"),searchParams = new URLSearchParams({"salt" : js_salt, "hash" : js_hash, "message" : js_mess});
+    salt_Password()
+    var js_mess = document.getElementById("message").value, js_salt = document.getElementById("salt").innerText, js_hash = md5(), url = new URL("https://agile.bu.edu/ec500_scripts/redis.php"),searchParams = new URLSearchParams({"salt" : js_salt, "hash" : js_hash, "message" : js_mess});
     url.search = searchParams.toString();
     const response = await fetch(url);
     var text = ((response.ok)?await response.text():"HTTP-ERROR: "+response.status).split("Result:");
@@ -90,7 +90,7 @@ function md5() {
         a=ii(a,b,c,d,x[i+ 4], 6, -145523070);d=ii(d,a,b,c,x[i+11],10,-1120210379);c=ii(c,d,a,b,x[i+ 2],15,  718787259);
         b=ii(b,c,d,a,x[i+ 9],21, -343485551);a=ad(a,olda);b=ad(b,oldb);c=ad(c,oldc);d=ad(d,oldd);
     }
-    document.getElementById("md5_password").innerHTML = rh(a)+rh(b)+rh(c)+rh(d);
+    return rh(a)+rh(b)+rh(c)+rh(d);
 }
 
 
