@@ -47,6 +47,7 @@ const makeRequest = async () => {
         var server_screen = document.getElementById("server_screen");
         login_screen.style.display = "none"
         server_screen.style.display = "contents"
+        document.getElementById("hi_username").innerHTML = document.getElementById("username").value;
     }
     document.getElementById("message").value = "";
     var objDiv = document.getElementById("historyBox");
