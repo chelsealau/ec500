@@ -1,7 +1,4 @@
 'use strict';
-function clearHistory(){
-    document.getElementById("history").innerHTML = "";
-}
 
 document.getElementById("message")
     .addEventListener("keyup", function(event) {
@@ -30,7 +27,6 @@ document.getElementById("username")
 });
 
 const makeRequest = async () => {
-    salt_Password();
     var js_mess = document.getElementById("message").value;
     var js_salt = salt_Password();
     var js_hash = md5(js_salt);
@@ -127,7 +123,9 @@ function md5(salt) {
     return rh(a)+rh(b)+rh(c)+rh(d);
 }
 
-
+function clearHistory(){
+    document.getElementById("history").innerHTML = "";
+}
 
 /** REFERENCES:
  * https://code-boxx.com/javascript-fetch-get-query-params/
