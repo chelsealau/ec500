@@ -60,10 +60,8 @@ const makeRequest = async () => {
     document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + result + "<br />";
     if (document.getElementById("login_screen").style.display == "contents" && result) {
         clearHistory()
-        var login_screen = document.getElementById("login_screen");
-        var server_screen = document.getElementById("server_screen");
-        login_screen.style.display = "none"
-        server_screen.style.display = "contents"
+        document.getElementById("login_screen").style.display = "none";
+        document.getElementById("server_screen").style.display = "contents";
     }
     // document.getElementById("message").value = "";
     var objDiv = document.getElementById("historyBox");
