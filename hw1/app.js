@@ -33,8 +33,6 @@ document.getElementById("loginBotton").addEventListener("click", try_login);
 function try_login(){
     makeRequest();
     document.getElementById("hi_username").innerHTML = document.getElementById("username").value;
-    document.getElementById("password").value="";
-    document.getElementById("username").value = "";
     document.getElementById("fail_login").style.display = "contents";
 }
 
