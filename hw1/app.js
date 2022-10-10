@@ -17,7 +17,6 @@ document.getElementById("password")
     event.preventDefault();
     if (event.keyCode === 13) {
         document.getElementById("loginButton").click();
-        document.getElementById("fail_login").style.display = "contents";
     }
 });
 
@@ -32,9 +31,8 @@ document.getElementById("username")
 document.getElementById("loginButton").addEventListener("click", try_login);
 
 function try_login(){
-    // makeRequest();
     document.getElementById("hi_username").innerHTML = document.getElementById("username").value;
-    document.getElementById("fail_login").style.display = "contents";
+    // document.getElementById("fail_login").style.display = "contents";
 }
 
 const makeRequest = async () => {
@@ -60,6 +58,8 @@ const makeRequest = async () => {
         clearHistory()
         document.getElementById("login_screen").style.display = "none";
         document.getElementById("server_screen").style.display = "contents";
+    } else if(document.getElementById("login_screen").style.display){
+        document.getElementById("fail_login").style.display = "contents";
     }
     // document.getElementById("message").value = "";
     var objDiv = document.getElementById("historyBox");
