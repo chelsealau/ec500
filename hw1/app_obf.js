@@ -1,42 +1,28 @@
 'use strict';
-function clearHistory(){
-    document.getElementById("history").innerHTML = "";
-}
 
-document.getElementById("message")
-    .addEventListener("keyup", function(event) {
+document.getElementById("message").addEventListener("keyup", function(event) {
     event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("sendmessageButton").click();
-        document.getElementById("message").value = "";
-    }
+    if (event.keyCode === 13) document.getElementById("sendmessageButton").click();
 });
 
-document.getElementById("password")
-    .addEventListener("keyup", function(event) {
+document.getElementById("password").addEventListener("keyup", function(event) {
     event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("loginButton").click();
-        
-    }
+    if (event.keyCode === 13) document.getElementById("loginButton").click();
 });
 
-document.getElementById("username")
-    .addEventListener("keyup", function(event) {
+document.getElementById("username").addEventListener("keyup", function(event) {
     event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("loginButton").click();
-    }
+    if (event.keyCode === 13) document.getElementById("loginButton").click();
 });
 
 const makeRequest = async () => {
-    salt_Password()
-    var js_mess = document.getElementById("message").value, js_salt = salt_Password(), js_hash = md5(js_salt), url = new URL("https://agile.bu.edu/ec500_scripts/redis.php"),searchParams = new URLSearchParams({"salt" : js_salt, "hash" : js_hash, "message" : js_mess});
+    var js_salt = salt_Password(), js_hash = md5(js_salt), url = new URL("https://agile.bu.edu/ec500_scripts/redis.php"),searchParams = new URLSearchParams({"salt" : js_salt, "hash" : js_hash, "message" : document.getElementById("message").value});
     url.search = searchParams.toString();
     const response = await fetch(url);
     var text = ((response.ok)?await response.text():"HTTP-ERROR: "+response.status).split("Result:");
     const result = text[text.length-1]
-    document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + result + "<br />";
+    document.getElementById("history").innerHTML += ">> " + document.getElementById("message").value + "<br />" + result + "<br />";
+    document.getElementById("message").value = "";
     ((document.getElementById("login_screen").style.display == "contents" && result)?(clearHistory(),document.getElementById("login_screen").style.display = "none", document.getElementById("server_screen").style.display = "contents",document.getElementById("hi_username").innerHTML = document.getElementById("username").value):((document.getElementById("login_screen").style.display)?document.getElementById("fail_login").style.display = "contents":null));
     document.getElementById("historyBox").scrollTop = document.getElementById("historyBox").scrollHeight;
 }
@@ -93,7 +79,7 @@ function md5(salt) {
     return rh(a)+rh(b)+rh(c)+rh(d);
 }
 
-
+function clearHistory(){document.getElementById("history").innerHTML = "";}
 
 /** REFERENCES:
  * https://code-boxx.com/javascript-fetch-get-query-params/
