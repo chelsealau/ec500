@@ -1,10 +1,22 @@
 'use strict';
+function clearHistory(){
+    document.getElementById("history").innerHTML = "";
+}
+
 document.getElementById("message")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.keyCode === 13) {
         document.getElementById("sendmessageButton").click();
         document.getElementById("message").value = "";
+    }
+});
+
+document.getElementById("password")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("loginBotton").click();
     }
 });
 
@@ -29,6 +41,14 @@ const makeRequest = async () => {
     text = text.split("Result:");
     const result = text[text.length-1]
     document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + result + "<br />";
+    if (document.getElementById("login_screen").style.display == "contents" && result) {
+        clearHistory()
+        var login_screen = document.getElementById("login_screen");
+        var server_screen = document.getElementById("server_screen");
+        login_screen.style.display = "none"
+        server_screen.style.display = "contents"
+    }
+    document.getElementById("message").value = "";
     var objDiv = document.getElementById("historyBox");
     objDiv.scrollTop = objDiv.scrollHeight;
 }
@@ -59,7 +79,7 @@ function salt_Password() {
 //  Original copyright (c) Paul Johnston & Greg Holt.
 //  The function itself is now 42 lines long.
 function md5() {
-    var inputString = document.getElementById("salt").innerHTML + document.getElementById("password").innerHTML 
+    var inputString = document.getElementById("salt").innerHTML + document.getElementById("password").value 
     var hc="0123456789abcdef";
     function rh(n) {var j,s="";for(j=0;j<=3;j++) s+=hc.charAt((n>>(j*8+4))&0x0F)+hc.charAt((n>>(j*8))&0x0F);return s;}
     function ad(x,y) {var l=(x&0xFFFF)+(y&0xFFFF);var m=(x>>16)+(y>>16)+(l>>16);return (m<<16)|(l&0xFFFF);}
@@ -102,9 +122,7 @@ function md5() {
     document.getElementById("md5_password").innerHTML = rh(a)+rh(b)+rh(c)+rh(d);
 }
 
-function clearHistory(){
-    document.getElementById("history").innerHTML = "";
-}
+
 
 /** REFERENCES:
  * https://code-boxx.com/javascript-fetch-get-query-params/

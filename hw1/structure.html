@@ -18,8 +18,13 @@
     </style> -->
   <body>
     <h1> WELCOME TO EC500 REDIS SERVER </h1>   
-    <h2> - GROUP 6 - </h2>
-      <p><span hidden type="hidden" id="password">A73397CF210AE</span></p>
+    <h2> - Group 6 - </h2>
+    <div id="login_screen" style="display:contents;">
+      <p>User name: <input type="text" id="username" placeholder="enter username"></p> 
+      <p>Password: <input type="password" id="password" placeholder="enter password"></p> 
+      <p><input type="button" id="loginBotton" onclick="makeRequest()" value="login"/></p>
+    </div>
+    <div id="server_screen" style="display:none;">
       <p><span hidden type="hidden" id="salt"></span></p>
       <p><span hidden type="hidden" id="md5_password"></span></p>
       <p><div id="historyBox">
