@@ -27,11 +27,11 @@ document.getElementById("username")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.keyCode === 13) {
-        document.getElementById("loginBotton").click();
+        document.getElementById("loginButton").click();
     }
 });
 
-document.getElementById("loginBotton").addEventListener("click", try_login);
+document.getElementById("loginButton").addEventListener("click", try_login);
 
 function try_login(){
     makeRequest();
