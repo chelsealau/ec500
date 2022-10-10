@@ -1,4 +1,7 @@
 'use strict';
+function clearHistory(){
+    document.getElementById("history").innerHTML = "";
+}
 
 document.getElementById("message")
     .addEventListener("keyup", function(event) {
@@ -27,11 +30,9 @@ document.getElementById("username")
 
 document.getElementById("loginBotton").addEventListener("click", try_login);
 
-function clearHistory(){
-    document.getElementById("history").innerHTML = "";
-}
-
 function try_login(){
+    makeRequest();
+    document.getElementById("hi_username").innerHTML = document.getElementById("username").value;
     document.getElementById("password").value="";
     document.getElementById("username").value = "";
     document.getElementById("fail_login").style.display = "contents";
@@ -62,7 +63,6 @@ const makeRequest = async () => {
         var server_screen = document.getElementById("server_screen");
         login_screen.style.display = "none"
         server_screen.style.display = "contents"
-        document.getElementById("hi_username").innerHTML = document.getElementById("username").value;
     }
     document.getElementById("message").value = "";
     var objDiv = document.getElementById("historyBox");
