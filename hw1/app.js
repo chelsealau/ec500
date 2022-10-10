@@ -1,7 +1,4 @@
 'use strict';
-function clearHistory(){
-    document.getElementById("history").innerHTML = "";
-}
 
 document.getElementById("message")
     .addEventListener("keyup", function(event) {
@@ -17,9 +14,6 @@ document.getElementById("password")
     event.preventDefault();
     if (event.keyCode === 13) {
         document.getElementById("loginBotton").click();
-        document.getElementById("password").value="";
-        document.getElementById("username").value = "";
-        document.getElementById("fail_login").style.display = "contents";
     }
 });
 
@@ -28,12 +22,20 @@ document.getElementById("username")
     event.preventDefault();
     if (event.keyCode === 13) {
         document.getElementById("loginBotton").click();
-        document.getElementById("password").value="";
-        document.getElementById("username").value = "";
-        document.getElementById("fail_login").style.display = "contents";
     }
 });
 
+document.getElementById("loginBotton").addEventListener("click", try_login);
+
+function clearHistory(){
+    document.getElementById("history").innerHTML = "";
+}
+
+function try_login(){
+    document.getElementById("password").value="";
+    document.getElementById("username").value = "";
+    document.getElementById("fail_login").style.display = "contents";
+}
 
 const makeRequest = async () => {
     salt_Password();
@@ -48,7 +50,6 @@ const makeRequest = async () => {
     const response = await fetch(url);
     if (response.ok) {
         var text = await response.text();
-        // console.log(text);
     } else {
         var text = "HTTP-ERROR: " + response.status;
     }
