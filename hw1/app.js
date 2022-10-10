@@ -110,4 +110,5 @@ function clearHistory(){
  * https://code-boxx.com/javascript-fetch-get-query-params/
  * https://stackoverflow.com/questions/61240305/reactjs-typeerror-failed-to-execute-fetch-on-window-invalid-name
  * https://stackoverflow.com/questions/11563638/how-do-i-get-the-value-of-text-input-field-using-javascript
+ * 
  */

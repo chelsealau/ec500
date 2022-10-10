@@ -18,18 +18,17 @@
     </style> -->
   <body>
     <h1> WELCOME TO EC500 REDIS SERVER </h1>   
-    <h2> - Group 6 - </h2>
+    <h2> - GROUP 6 - </h2>
       <p><span hidden type="hidden" id="password">A73397CF210AE</span></p>
       <p><span hidden type="hidden" id="salt"></span></p>
       <p><span hidden type="hidden" id="md5_password"></span></p>
-      <p>Message: <input type="text" id="message"/> 
-        <input type="button" onclick="makeRequest()" id="sendmessageButton" value="send"/></p>
-      <p><span hidden type="text" id="response"> </span></p> 
-      
       <p><div id="historyBox">
         <span type="text" id="history"></span></div></p>
         <!-- <span type="text" id="response"></span> -->
-        <p><input type="button" onclick="clearHistory()" id="clearHistory" value="clear"/></p>
+      <p> <input type="text" id="message" placeholder="COMMAND >>" /> <p>
+      <p>
+        <input type="button" onclick="makeRequest()" id="sendmessageButton" value="SUBMIT"/>
+        <input type="button" onclick="clearHistory()" id="clearHistory" value="CLEAR"/></p>
   </body>
   <script src="app.js"></script>  
 </html>
