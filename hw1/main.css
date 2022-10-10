@@ -80,12 +80,14 @@ h3 {
   border-color: #332f24;
   padding: 5%;
   color: #332f24;
+  overflow-y: scroll;
   }
 
 #history {
   color: #332f24;
   font-size: larger;
   font-family: monospace;
+  overflow-y: scroll;
 }
 
 #message {
