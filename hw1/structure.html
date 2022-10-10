@@ -13,6 +13,9 @@
     <div id="login_screen" style="display:contents;">
       <p>User name: <input type="text" id="username" placeholder="enter username"></p> 
       <p>Password: <input type="password" id="password" placeholder="enter password"></p> 
+      <div id="fail_login" style="display:none;">
+        <p>wrong password</p>
+      </div>
       <p><input type="button" id="loginBotton" onclick="makeRequest()" value="login"/></p>
     </div>
     <div id="server_screen" style="display:none;">
