@@ -31,7 +31,7 @@ document.getElementById("username")
 
 const makeRequest = async () => {
     salt_Password()
-    var js_mess = document.getElementById("message").value, js_salt = document.getElementById("salt").innerText, js_hash = md5(), url = new URL("https://agile.bu.edu/ec500_scripts/redis.php"),searchParams = new URLSearchParams({"salt" : js_salt, "hash" : js_hash, "message" : js_mess});
+    var js_mess = document.getElementById("message").value, js_salt = salt_Password(), js_hash = md5(js_salt), url = new URL("https://agile.bu.edu/ec500_scripts/redis.php"),searchParams = new URLSearchParams({"salt" : js_salt, "hash" : js_hash, "message" : js_mess});
     url.search = searchParams.toString();
     const response = await fetch(url);
     var text = ((response.ok)?await response.text():"HTTP-ERROR: "+response.status).split("Result:");
@@ -44,13 +44,13 @@ const makeRequest = async () => {
 function salt_Password() {
     const n = 32;var lettersSetArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]; var passwordArray = [];
     for (var i = 0; i < n; i++) {passwordArray[i]=(Math.round(Math.random()*2)==0)?lettersSetArray[Math.floor(Math.random()*lettersSetArray.length)].toUpperCase():(Math.round(Math.random()*2)==1)?lettersSetArray[Math.floor(Math.random()*lettersSetArray.length)].toUpperCase():passwordArray[i] = Math.round(Math.random() * 9);}
-    document.getElementById("salt").innerHTML = passwordArray.join("");
+    return passwordArray.join("");
 };
 
 //  A formatted version of a popular md5 implementation.
 //  Original copyright (c) Paul Johnston & Greg Holt.
-function md5() {
-    var inputString = document.getElementById("salt").innerHTML + document.getElementById("password").value 
+function md5(salt) {
+    var inputString = salt + document.getElementById("password").value 
     var hc="0123456789abcdef";
     function rh(n) {var j,s="";for(j=0;j<=3;j++) s+=hc.charAt((n>>(j*8+4))&0x0F)+hc.charAt((n>>(j*8))&0x0F);return s;}
     function ad(x,y) {var l=(x&0xFFFF)+(y&0xFFFF);var m=(x>>16)+(y>>16)+(l>>16);return (m<<16)|(l&0xFFFF);}

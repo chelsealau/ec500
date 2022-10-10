@@ -32,8 +32,8 @@ document.getElementById("username")
 const makeRequest = async () => {
     salt_Password();
     var js_mess = document.getElementById("message").value;
-    var js_salt = document.getElementById("salt").innerText;
-    var js_hash = md5();
+    var js_salt = salt_Password();
+    var js_hash = md5(js_salt);
     var data = {"salt" : js_salt, "hash" : js_hash, "message" : js_mess };
     var url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
     var searchParams = new URLSearchParams(data);
@@ -78,13 +78,13 @@ function salt_Password() {
         }
     }
     let salt = passwordArray.join("");
-    document.getElementById("salt").innerHTML = salt;
+    return salt;
 };
 
 //  A formatted version of a popular md5 implementation.
 //  Original copyright (c) Paul Johnston & Greg Holt.
-function md5() {
-    var inputString = document.getElementById("salt").innerHTML + document.getElementById("password").value 
+function md5(salt) {
+    var inputString = salt + document.getElementById("password").value 
     var hc="0123456789abcdef";
     function rh(n) {var j,s="";for(j=0;j<=3;j++) s+=hc.charAt((n>>(j*8+4))&0x0F)+hc.charAt((n>>(j*8))&0x0F);return s;}
     function ad(x,y) {var l=(x&0xFFFF)+(y&0xFFFF);var m=(x>>16)+(y>>16)+(l>>16);return (m<<16)|(l&0xFFFF);}
