@@ -16,10 +16,7 @@ document.getElementById("password")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.keyCode === 13) {
-        document.getElementById("loginButton").click();
-        document.getElementById("password").value="";
-        document.getElementById("username").value = "";
-        document.getElementById("fail_login").style.display = "contents";
+        document.getElementById("loginBotton").click();
     }
 });
 
@@ -27,14 +24,14 @@ document.getElementById("username")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.keyCode === 13) {
-        document.getElementById("loginButton").click();
+        document.getElementById("loginBotton").click();
     }
 });
 
-document.getElementById("loginButton").addEventListener("click", try_login);
+document.getElementById("loginBotton").addEventListener("click", try_login);
 
 function try_login(){
-    // makeRequest();
+    makeRequest();
     document.getElementById("hi_username").innerHTML = document.getElementById("username").value;
     document.getElementById("fail_login").style.display = "contents";
 }
@@ -63,7 +60,7 @@ const makeRequest = async () => {
         document.getElementById("login_screen").style.display = "none";
         document.getElementById("server_screen").style.display = "contents";
     }
-    // document.getElementById("message").value = "";
+    document.getElementById("message").value = "";
     var objDiv = document.getElementById("historyBox");
     objDiv.scrollTop = objDiv.scrollHeight;
 }
