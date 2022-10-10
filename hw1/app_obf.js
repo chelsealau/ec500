@@ -16,10 +16,7 @@ document.getElementById("password")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.keyCode === 13) {
-        document.getElementById("loginButton").click();
-        document.getElementById("password").value="";
-        document.getElementById("username").value = "";
-        document.getElementById("fail_login").style.display = "contents";
+        document.getElementById("loginBotton").click();
     }
 });
 
@@ -45,51 +42,28 @@ const makeRequest = async () => {
     var js_mess = document.getElementById("message").value;
     var js_salt = document.getElementById("salt").innerText;
     var js_hash = document.getElementById("md5_password").innerText;
-    var data = {"salt" : js_salt, "hash" : js_hash, "message" : js_mess };
     var url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
-    var searchParams = new URLSearchParams(data);
+    var searchParams = new URLSearchParams({"salt" : js_salt, "hash" : js_hash, "message" : js_mess });
     url.search = searchParams.toString();
     const response = await fetch(url);
-    if (response.ok) {
-        var text = await response.text();
-    } else {
-        var text = "HTTP-ERROR: " + response.status;
-    }
-    text = text.split("Result:");
-    const result = text[text.length-1]
+    var text = (response.ok?await response.text():"HTTP-ERROR: "+response.status).split("Result:");
+    const result = text[text.length-1];
     document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + result + "<br />";
-    if (document.getElementById("login_screen").style.display == "contents" && result) {
-        clearHistory()
+    if (document.getElementById("login_screen").style.display == "contents" && result){
+        clearHistory();
         var login_screen = document.getElementById("login_screen");
         var server_screen = document.getElementById("server_screen");
         login_screen.style.display = "none"
         server_screen.style.display = "contents"
     }
     document.getElementById("message").value = "";
-    var objDiv = document.getElementById("historyBox");
-    objDiv.scrollTop = objDiv.scrollHeight;
+    document.getElementById("historyBox").scrollTop = document.getElementById("historyBox").scrollHeight;
 }
 
 function salt_Password() {
-    const n = 32;
-    var lettersSetArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", 
-                        "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-    var passwordArray = [];
-
-    for (var i = 0; i < n; i++) {
-        var select = Math.round(Math.random() * 2);
-        if (select === 0) {
-            passwordArray[i] = lettersSetArray[Math.floor(Math.random()*lettersSetArray.length)].toUpperCase();
-        }
-        else if (select == 1){
-            passwordArray[i] = lettersSetArray[Math.floor(Math.random()*lettersSetArray.length)];
-        }
-        else {
-            passwordArray[i] = Math.round(Math.random() * 9);
-        }
-    }
-    let salt = passwordArray.join("");
-    document.getElementById("salt").innerHTML = salt;
+    const n = 32;var lettersSetArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]; var passwordArray = [];
+    for (var i = 0; i < n; i++) {passwordArray[i]=(Math.round(Math.random()*2)==0)?lettersSetArray[Math.floor(Math.random()*lettersSetArray.length)].toUpperCase():(Math.round(Math.random()*2)==1)?lettersSetArray[Math.floor(Math.random()*lettersSetArray.length)].toUpperCase():passwordArray[i] = Math.round(Math.random() * 9);}
+    document.getElementById("salt").innerHTML = passwordArray.join("");
 };
 
 //  A formatted version of a popular md5 implementation.
