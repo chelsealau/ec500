@@ -34,7 +34,7 @@ document.getElementById("username")
 document.getElementById("loginButton").addEventListener("click", try_login);
 
 function try_login(){
-    makeRequest();
+    // makeRequest();
     document.getElementById("hi_username").innerHTML = document.getElementById("username").value;
     document.getElementById("fail_login").style.display = "contents";
 }
@@ -65,7 +65,7 @@ const makeRequest = async () => {
         login_screen.style.display = "none"
         server_screen.style.display = "contents"
     }
-    document.getElementById("message").value = "";
+    // document.getElementById("message").value = "";
     var objDiv = document.getElementById("historyBox");
     objDiv.scrollTop = objDiv.scrollHeight;
 }
