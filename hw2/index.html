@@ -27,7 +27,8 @@
           <p> <input type="text" id="message" placeholder="COMMAND >>" /> <p>
           <p>
             <input type="button" onclick="makeRequest()" id="sendmessageButton" value="SUBMIT"/>
-            <input type="button" onclick="clearHistory()" id="clearHistory" value="CLEAR"/></p>
+            <input type="button" onclick="clearHistory()" id="clearHistory" value="CLEAR"/>
+            <input type="button" onclick="commandBack()" id="commandBack" value="BACK"></p>
         </div>
         <div id="menu_screen" style="display:none;">
           <input type="button" onclick="navCommand()" id="commandInterfaceButton" value="COMMAND INTERFACE"/>
@@ -51,8 +52,15 @@
                 <input type="text" name="itemName" placeholder="Enter Name"/>&nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-3" placeholder="Enter Rank"/><br>
                 <input type="text" name="itemName" placeholder="Enter Name"/>&nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-4" placeholder="Enter Rank"/><br>
             </p> 
-            <!-- <p> message: <input type="text" id="message" placeholder="COMMAND >>" /> <p></p> -->
-        </div>
+        <p> <input type="button" onclick="saveRanks()" id="submitValues" value="SUBMIT"/> 
+        <input type="button" onclick="auctionBack()" id="auctionBack" value="BACK"></p>
+      </div>
+    <div id="Results" style="display:none;">
+      <h3> SUCCESSFULLY SUBMITTED </h3>
+      <ul id="results_list"></ul> 
+      <p> SUM = <span type="text" id="resultSum"></span></p>
+      <input type="button" onclick="resultsBack()" id="resultsBack" value="BACK">
+    </div>
   </body>
   <script src="app.js"></script>  
 </html>
