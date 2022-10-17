@@ -58,7 +58,7 @@ const makeRequest = async () => {
     const result = text[text.length-1]
     if (document.getElementById("login_screen").style.display == "contents" && result) {
         document.getElementById("login_screen").style.display = "none";
-        document.getElementById("setDetails").style.display = "contents";
+        document.getElementById("menu_screen").style.display = "contents";
     } else if(document.getElementById("login_screen").style.display){
         document.getElementById("fail_login").style.display = "contents";
     }
@@ -158,7 +158,7 @@ function updateSubTotal() {
 }
 
 function saveRanks() {
-    document.getElementById('Action_screen').style.display = "none";
+    document.getElementById('Auction_screen').style.display = "none";
     document.getElementById('Results').style.display = "list-item";
     document.getElementById('resultSum').innerHTML = document.getElementById('sumScore').innerHTML;
     let res_list = document.getElementById('results_list');
@@ -175,7 +175,7 @@ function saveRanks() {
 }
 
 function goBack() {
-    document.getElementById('Action_screen').style.display = "contents";
+    document.getElementById('Auction_screen').style.display = "contents";
     document.getElementById('Results').style.display = "none";
 }
 
@@ -186,7 +186,7 @@ function navCommand() {
 
 function navAuction() {
     document.getElementById("menu_screen").style.display = "none";
-    document.getElementById("Auction_screen").style.display = "contents";
+    document.getElementById("setDetails").style.display = "contents";
 }
 
 
@@ -194,6 +194,7 @@ function setDetail(){
     var staus = confirm("Are you ok with the settings?")
     if (staus){
         document.getElementById("setDetails").style.display = "none";
-        document.getElementById("Action_screen").style.display = "contents";
+        document.getElementById("Auction_screen").style.display = "contents";
     }
+    document.getElementById("Auction_screen").style.display = "contents";
 };
