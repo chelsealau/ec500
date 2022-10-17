@@ -174,9 +174,19 @@ function saveRanks() {
     
 }
 
-function goBack() {
+function resultsBack() {
     document.getElementById('Auction_screen').style.display = "contents";
     document.getElementById('Results').style.display = "none";
+}
+
+function auctionBack() {
+    document.getElementById('Auction_screen').style.display = "none";
+    document.getElementById('menu_screen').style.display = "contents";
+}
+
+function commandBack() {
+    document.getElementById('server_screen').style.display = "none";
+    document.getElementById('menu_screen').style.display = "contents";
 }
 
 function navCommand() {
