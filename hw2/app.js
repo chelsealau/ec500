@@ -8,10 +8,14 @@ function updateSubTotal() {
         if(parseInt(arr[i].value))
             tot += parseInt(arr[i].value);
             arr[i].style.backgroundColor = "white";
+            if (parseInt(arr[i].value) < 0 || parseInt(arr[i].value) > 100){
+                alert("RANK IS OUT OF RANGE (0-100)");
+                arr[i].style.backgroundColor = "#d9361a";
+            }
         }
     document.getElementById('sumScore').innerHTML = tot;
     if (tot>100){
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
-        alert("TOTAL SCORE IS OVER 100")
+        alert("TOTAL RANK IS OVER 100")
     }
 }
