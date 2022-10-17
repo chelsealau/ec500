@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EC500_HW2</title>
-    <!-- <link rel="stylesheet" href="main.css"> -->
+    <link rel="stylesheet" href="main.css">
   </head>
   <body>
     <h1> Group Auction </h1>   
@@ -49,6 +49,13 @@
             git-22 <input onchange="updateSubTotal()" type="number" name="score" id="git-22" placeholder="Enter Rank"/><br>
             git-23 <input onchange="updateSubTotal()" type="number" name="score" id="git-23" placeholder="Enter Rank"/><br>
         </p> 
+        <p> <input type="button" onclick="saveRanks()" id="submitValues" value="SUBMIT"/> </p>
+      </div>
+    <div id="Results" style="display:none;">
+      <h3> SUCCESSFULLY SUBMITTED </h3>
+      <ul id="results_list"></ul> 
+      <p> SUM = <span type="text" id="resultSum"></span></p>
+      <input type="button" onclick="goBack()" id="return_button" value="BACK"
     </div>
   </body>
   <script src="app.js"></script>  
