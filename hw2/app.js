@@ -191,8 +191,8 @@ function navAuction() {
 
 
 function setDetail(){
-    var staus = confirm("Are you ok with the settings?")
-    if (staus){
+    var status = confirm("Are you ok with the settings?")
+    if (status){
         document.getElementById("setDetails").style.display = "none";
         document.getElementById("Auction_screen").style.display = "contents";
     }
