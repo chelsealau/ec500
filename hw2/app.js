@@ -12,5 +12,6 @@ function updateSubTotal() {
     document.getElementById('sumScore').innerHTML = tot;
     if (tot>100){
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
+        alert("TOTAL SCORE IS OVER 100")
     }
 }

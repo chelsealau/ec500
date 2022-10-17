@@ -8,7 +8,7 @@
     <!-- <link rel="stylesheet" href="main.css"> -->
   </head>
   <body>
-    <h1> Group Action </h1>   
+    <h1> Group Auction </h1>   
     <h2> - GROUP 6 - </h2>
       <!-- <div id="login_screen" style="display:contents;">
         <div id="loginBox">
@@ -22,12 +22,12 @@
       </div> -->
     <div id="Action_screen" style="display:contents;">
         <p>HELLO, WikiName<span type="text" id="WikiName"></span></p>
-        <p>SUM = <span type="text" id="sumScore"></span></p>
+        <p>SUM = <span type="text" id="sumScore"></span><span type="text" id="sumScore" style="display:none">Total over 100</span></p>
         <p>
-            git-1 <input onblur="updateSubTotal()" type="text" name="score" id="git0"/><br>
-            git-2 <input onblur="updateSubTotal()" type="text" name="score" id="git1"/><br>
-            git-3 <input onblur="updateSubTotal()" type="text" name="score" id="git2"/><br>
-            git-4 <input onblur="updateSubTotal()" type="text" name="score" id="git3"/><br>
+            git-1 <input onchange="updateSubTotal()" type="number" name="score" id="git0"/><br>
+            git-2 <input onchange="updateSubTotal()" type="number" name="score" id="git1"/><br>
+            git-3 <input onchange="updateSubTotal()" type="number" name="score" id="git2"/><br>
+            git-4 <input onchange="updateSubTotal()" type="number" name="score" id="git3"/><br>
         </p> 
     </div>
   </body>
