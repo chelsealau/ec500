@@ -10,17 +10,24 @@
   <body>
     <h1> Group Auction </h1>   
     <h2> - GROUP 6 - </h2>
-      <!-- <div id="login_screen" style="display:contents;">
-        <div id="loginBox">
-          <p>USERNAME: <input type="text" id="WikiName" placeholder="Enter WikiName"></p> 
-          <p>PASSWORD: <input type="password" id="password" placeholder="Enter password"></p> 
-          <div id="fail_login" style="display:none;">
-            <p>FAILED LOGIN: WRONG PASSWORD</p>
-          </div>
-          <p><input type="button" id="loginButton" onclick="makeRequest()" value="LOGIN"/></p>
+        <div id="login_screen" style="display:contents;">
+            <div id="loginBox">
+            <p>USERNAME: <input type="text" id="WikiName" placeholder="Enter WikiName"></p> 
+            <p>PASSWORD: <input type="password" id="password" placeholder="Enter password"></p> 
+            <div id="fail_login" style="display:none;">
+                <p>FAILED LOGIN: WRONG PASSWORD</p>
+            </div>
+            <p><input type="button" id="loginButton" onclick="makeRequest()" value="LOGIN"/></p>
+            </div>
         </div>
-      </div> -->
-    <div id="Action_screen" style="display:contents;">
+        <div id="setDetails" style="display:none;">
+            <div id="loginBox">
+              <p>Max Sum: <input type="number" id="maxSum" placeholder="Enter Rank"></p> 
+              <p>Max Rank: <input type="number" id="maxRank" placeholder="Enter Rank"></p> 
+              <p><input type="button" id="setButton" onclick="setDetail()" value="SET"/></p>
+            </div>
+          </div>
+    <div id="Auction_screen" style="display:none;">
         <p>HELLO, WikiName<span type="text" id="WikiName"></span></p>
         <p>SUM = <span type="text" id="sumScore">0</span></p>
         <p>
