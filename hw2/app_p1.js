@@ -1,11 +1,13 @@
-/** REFERENCES
- * https://developer.mozilla.org/en-US/docs/Web/CSS/display
- * https://stackoverflow.com/questions/66774779/how-do-you-clear-a-list-in-javascript-i-e-delete-all-items-in-a-list-with-one
- * https://www.geeksforgeeks.org/how-to-creating-html-list-from-javascript-array/
- * 
- */
-
 'use strict';
+
+document.getElementById("message")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("sendmessageButton").click();
+        document.getElementById("message").value = "";
+    }
+});
 
 document.getElementById("password")
     .addEventListener("keyup", function(event) {
@@ -14,31 +16,15 @@ document.getElementById("password")
         document.getElementById("loginButton").click();
         
     }
-})
+});
 
-document.getElementById("WikiName")
+document.getElementById("username")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.keyCode === 13) {
         document.getElementById("loginButton").click();
     }
-})
-
-document.getElementById("maxSum")
-    .addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("setButton").click();
-    }
-})
-
-document.getElementById("maxRank")
-    .addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13) {
-        document.getElementById("setButton").click();
-    }
-})
+});
 
 const makeRequest = async () => {
     var js_mess = document.getElementById("message").value;
@@ -56,12 +42,17 @@ const makeRequest = async () => {
     }
     text = text.split("Result:");
     const result = text[text.length-1]
+    document.getElementById("history").innerHTML += ">> " + js_mess + "<br />" + result + "<br />";
     if (document.getElementById("login_screen").style.display == "contents" && result) {
+        clearHistory()
         document.getElementById("login_screen").style.display = "none";
         document.getElementById("menu_screen").style.display = "contents";
+        document.getElementById("hi_username").innerHTML = document.getElementById("username").value;
     } else if(document.getElementById("login_screen").style.display){
         document.getElementById("fail_login").style.display = "contents";
     }
+    var objDiv = document.getElementById("historyBox");
+    objDiv.scrollTop = objDiv.scrollHeight;
 }
 
 function salt_Password() {
@@ -132,6 +123,21 @@ function md5(salt) {
     return rh(a)+rh(b)+rh(c)+rh(d);
 }
 
+function clearHistory(){
+    document.getElementById("history").innerHTML = "";
+}
+
+function navCommand() {
+    document.getElementById("menu_screen").style.display = "none";
+    document.getElementById("server_screen").style.display = "contents";
+}
+
+function navAuction() {
+    document.getElementById("menu_screen").style.display = "none";
+    document.getElementById("Auction_screen").style.display = "contents";
+}
+
+
 function updateSubTotal() {
     document.getElementById('sumScore').style.backgroundColor = "white";
     var arr = document.getElementsByName('score');
@@ -140,21 +146,20 @@ function updateSubTotal() {
         if(parseInt(arr[i].value))
             tot += parseInt(arr[i].value);
             arr[i].style.backgroundColor = "white";
-            if (parseInt(arr[i].value) < 0 || parseInt(arr[i].value) > parseInt(document.getElementById('maxRank').value)){
-                alert(arr[i].id + " RANK IS OUT OF RANGE(0-"+document.getElementById('maxRank').value+")");
+            if (parseInt(arr[i].value) < 0 || parseInt(arr[i].value) > 100){
+                alert(arr[i].id + " RANK IS OUT OF RANGE (0-100)");
                 arr[i].style.backgroundColor = "#d9361a";
             }
         }
     document.getElementById('sumScore').innerHTML = tot;
-    if (tot>parseInt(document.getElementById('maxSum').value)){
+    if (tot>100){
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
-        alert("SUM OF RANK IS OVER "+parseInt(document.getElementById('maxSum').value))
+        alert("SUM OF RANK IS OVER 100")
     }
     if (tot<0){
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
         alert("SUM OF RANK IS UNDER 0")
     }
-
 }
 
 function saveRanks() {
@@ -179,22 +184,9 @@ function goBack() {
     document.getElementById('Results').style.display = "none";
 }
 
-function navCommand() {
-    document.getElementById("menu_screen").style.display = "none";
-    document.getElementById("server_screen").style.display = "contents";
-}
-
-function navAuction() {
-    document.getElementById("menu_screen").style.display = "none";
-    document.getElementById("setDetails").style.display = "contents";
-}
-
-
-function setDetail(){
-    var status = confirm("Are you ok with the settings?")
-    if (status){
-        document.getElementById("setDetails").style.display = "none";
-        document.getElementById("Auction_screen").style.display = "contents";
-    }
-    document.getElementById("Auction_screen").style.display = "contents";
-};
+/** REFERENCES:
+ * https://code-boxx.com/javascript-fetch-get-query-params/
+ * https://stackoverflow.com/questions/61240305/reactjs-typeerror-failed-to-execute-fetch-on-window-invalid-name
+ * https://stackoverflow.com/questions/11563638/how-do-i-get-the-value-of-text-input-field-using-javascript
+ * 
+ */
