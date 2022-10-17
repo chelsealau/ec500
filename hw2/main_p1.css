@@ -1,0 +1,119 @@
+html {
+  /* font-family:Arial, Helvetica, sans-serif; */
+  font-family: monospace;
+  font-size: larger;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+  background: url("background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-size: larger;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+h1, h2 {
+  top: 20px;
+  color: #332f24;
+  text-align: center;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+#loginBox {
+  color: #332f24;
+  font-weight: bold;
+  font-size: large;
+  border-style: solid;
+  border-color: #332f24;
+  border-width: 5px;
+  border-left-width: 35px;
+  background-color: #f5f0e4;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 75px;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width: auto;
+}
+
+#username, #password {
+  font-family: monospace;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  color: #332f24;
+  height: 30px;
+}
+
+#loginButton {
+  font-family: monospace;
+  font-weight: bolder;
+  color: #f5f0e4;
+  background-color: #332f24;
+  border-radius: 10px;
+  font-size: larger;
+}
+
+#historyBox {
+  align-items: center;
+  width: auto;
+  height: 50%;
+  background: #f5f0e4;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  border-style: solid;
+  border-top-width: 35px;
+  border-color: #332f24;
+  padding: 5%;
+  color: #332f24;
+  overflow-y: scroll;
+  }
+
+#history {
+  color: #332f24;
+  font-size: larger;
+  font-family: monospace;
+}
+
+#message {
+  font-family: monospace;
+  font-size: larger;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  width: 98%;
+  height: 30px;
+  background-color: #f5f0e4;
+  padding-left: 5px;
+}
+
+#sendmessageButton, #clearHistory {
+  font-family: monospace;
+  font-weight: bolder;
+  font-size: larger;
+  color: #f5f0e4;
+  background-color: #332f24;
+  border-color: #332f24;
+  border-radius: 10px;
+}
+
+
+/**References
+* https://css-tricks.com/the-shapes-of-css/
+* https://unsplash.com/photos/QWutu2BRpOs?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink
+* https://css-tricks.com/perfect-full-page-background-image/
+*/
