@@ -59,6 +59,7 @@ const makeRequest = async () => {
     if (document.getElementById("login_screen").style.display == "contents" && result) {
         document.getElementById("login_screen").style.display = "none";
         document.getElementById("menu_screen").style.display = "contents";
+        document.getElementById("displayName").innerHTML = document.getElementById("WikiName").value;
     } else if(document.getElementById("login_screen").style.display){
         document.getElementById("fail_login").style.display = "contents";
     }
@@ -208,3 +209,33 @@ function setDetail(){
     }
     document.getElementById("Auction_screen").style.display = "contents";
 };
+
+function addRow() {
+    var table = document.getElementById("itemTable");
+    var num_rows = document.getElementById("itemTable").rows.length;
+
+    var inputItem0 = document.createElement('input');
+    inputItem0.setAttribute('name','itemName')
+    inputItem0.setAttribute('placeholder','Enter Name')
+
+    var inputItem1 = document.createElement('input');
+    inputItem1.setAttribute('name','score')
+    inputItem1.setAttribute('placeholder','Enter Rank')
+    inputItem1.setAttribute('onchange','updateSubTotal()')
+    inputItem1.setAttribute('type','number')
+
+    // var buttonItem1 = document.createElement('button');
+    // inputItem1.setAttribute('value','Remove Row')
+
+    var row = table.insertRow(num_rows);
+    var cell0 = row.insertCell(0);
+    cell0.appendChild(inputItem0);
+    var cell1 = row.insertCell(1);
+    cell1.appendChild(inputItem1);
+    // cell1.appendChild(buttonItem1);
+}
+
+
+
+
+
