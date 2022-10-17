@@ -179,7 +179,16 @@ function goBack() {
     document.getElementById('Results').style.display = "none";
 }
 
-};
+function navCommand() {
+    document.getElementById("menu_screen").style.display = "none";
+    document.getElementById("server_screen").style.display = "contents";
+}
+
+function navAuction() {
+    document.getElementById("menu_screen").style.display = "none";
+    document.getElementById("Auction_screen").style.display = "contents";
+}
+
 
 function setDetail(){
     var staus = confirm("Are you ok with the settings?")
