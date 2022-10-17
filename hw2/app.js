@@ -141,7 +141,7 @@ function updateSubTotal() {
             tot += parseInt(arr[i].value);
             arr[i].style.backgroundColor = "#ffffff";
             if (parseInt(arr[i].value) < 0 || parseInt(arr[i].value) > parseInt(document.getElementById('maxRank').value)){
-                alert(arr[i].id + " RANK IS OUT OF RANGE(0-"+document.getElementById('maxRank').value+")");
+                alert((i+1)+ "st CHOICE\nRANK IS OUT OF RANGE(0-"+document.getElementById('maxRank').value+")");
                 arr[i].style.backgroundColor = "#d9361a";
             }
         }
