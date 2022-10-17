@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EC500_HW1</title>
+    <link rel="stylesheet" href="main_p1.css">
+  </head>
+  <body>
+    <h1> WELCOME TO EC500 REDIS SERVER </h1>   
+    <h2> - GROUP 6 - </h2>
+      <div id="login_screen" style="display:contents;">
+        <div id="loginBox">
+          <p>USERNAME: <input type="text" id="username" placeholder="Enter username"></p> 
+          <p>PASSWORD: <input type="password" id="password" placeholder="Enter password"></p> 
+          <div id="fail_login" style="display:none;">
+            <p>FAILED LOGIN: WRONG PASSWORD</p>
+          </div>
+          <p><input type="button" id="loginButton" onclick="makeRequest()" value="LOGIN"/></p>
+        </div>
+      </div>
+    <div id="server_screen" style="display:none;">
+      <p>HELLO, <span type="text" id="hi_username"></span></p>
+      <p><div id="historyBox">
+        <span type="text" id="history"></span></div></p>
+      <p> <input type="text" id="message" placeholder="COMMAND >>" /> <p>
+      <p>
+        <input type="button" onclick="makeRequest()" id="sendmessageButton" value="SUBMIT"/>
+        <input type="button" onclick="clearHistory()" id="clearHistory" value="CLEAR"/></p>
+    </div>
+    <div id="menu_screen" style="display:none;">
+      <input type="button" onclick="navCommand()" id="commandInterfaceButton" value="COMMAND INTERFACE"/>
+      <input type="button" onclick="navAuction()" id="auctionButton" value="AUCTION INTERFACE"/>
+    </div>
+    <div id="Auction_screen" style="display:none;">
+      <p>HELLO, WikiName<span type="text" id="WikiName"></span></p>
+      <p>SUM = <span type="text" id="sumScore">0</span></p>
+      <p>
+          git-0 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-0" placeholder="Enter Rank"/><br>
+          git-1 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-1" placeholder="Enter Rank"/><br>
+          git-2 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-2" placeholder="Enter Rank"/><br>
+          git-3 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-3" placeholder="Enter Rank"/><br>
+          git-4 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-4" placeholder="Enter Rank"/><br>
+          git-5 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-5" placeholder="Enter Rank"/><br>
+          git-6 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-6" placeholder="Enter Rank"/><br>
+          git-7 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-7" placeholder="Enter Rank"/><br>
+          git-8 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-8" placeholder="Enter Rank"/><br>
+          git-9 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-9" placeholder="Enter Rank"/><br>
+          git-10 <input onchange="updateSubTotal()" type="number" name="score" id="git-10" placeholder="Enter Rank"/><br>
+          git-11 <input onchange="updateSubTotal()" type="number" name="score" id="git-11" placeholder="Enter Rank"/><br>
+          git-12 <input onchange="updateSubTotal()" type="number" name="score" id="git-12" placeholder="Enter Rank"/><br>
+          git-13 <input onchange="updateSubTotal()" type="number" name="score" id="git-13" placeholder="Enter Rank"/><br>
+          git-14 <input onchange="updateSubTotal()" type="number" name="score" id="git-14" placeholder="Enter Rank"/><br>
+          git-15 <input onchange="updateSubTotal()" type="number" name="score" id="git-15" placeholder="Enter Rank"/><br>
+          git-16 <input onchange="updateSubTotal()" type="number" name="score" id="git-16" placeholder="Enter Rank"/><br>
+          git-17 <input onchange="updateSubTotal()" type="number" name="score" id="git-17" placeholder="Enter Rank"/><br>
+          git-18 <input onchange="updateSubTotal()" type="number" name="score" id="git-18" placeholder="Enter Rank"/><br>
+          git-19 <input onchange="updateSubTotal()" type="number" name="score" id="git-19" placeholder="Enter Rank"/><br>
+          git-20 <input onchange="updateSubTotal()" type="number" name="score" id="git-20" placeholder="Enter Rank"/><br>
+          git-21 <input onchange="updateSubTotal()" type="number" name="score" id="git-21" placeholder="Enter Rank"/><br>
+          git-22 <input onchange="updateSubTotal()" type="number" name="score" id="git-22" placeholder="Enter Rank"/><br>
+          git-23 <input onchange="updateSubTotal()" type="number" name="score" id="git-23" placeholder="Enter Rank"/><br>
+      </p> 
+      <p> <input type="button" onclick="saveRanks()" id="submitValues" value="SUBMIT"/> </p>
+    </div>
+  <div id="Results" style="display:none;">
+    <h3> SUCCESSFULLY SUBMITTED </h3>
+    <ul id="results_list"></ul> 
+    <p> SUM = <span type="text" id="resultSum"></span></p>
+    <input type="button" onclick="goBack()" id="return_button" value="BACK">
+  </div>
+  </body>
+  <script src="app_p1.js"></script>  
+</html>
