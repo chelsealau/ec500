@@ -224,18 +224,13 @@ function addRow() {
     inputItem1.setAttribute('onchange','updateSubTotal()')
     inputItem1.setAttribute('type','number')
 
-    // var buttonItem1 = document.createElement('button');
-    // inputItem1.setAttribute('value','Remove Row')
-
     var row = table.insertRow(num_rows);
     var cell0 = row.insertCell(0);
     cell0.appendChild(inputItem0);
     var cell1 = row.insertCell(1);
     cell1.appendChild(inputItem1);
-    // cell1.appendChild(buttonItem1);
+    cell1.appendChild(buttonItem1);
 }
-
-
 
 
 
