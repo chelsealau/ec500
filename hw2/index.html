@@ -10,46 +10,54 @@
   <body>
     <h1> Group Auction </h1>   
     <h2> - GROUP 6 - </h2>
-      <!-- <div id="login_screen" style="display:contents;">
-        <div id="loginBox">
-          <p>USERNAME: <input type="text" id="WikiName" placeholder="Enter WikiName"></p> 
-          <p>PASSWORD: <input type="password" id="password" placeholder="Enter password"></p> 
-          <div id="fail_login" style="display:none;">
-            <p>FAILED LOGIN: WRONG PASSWORD</p>
-          </div>
-          <p><input type="button" id="loginButton" onclick="makeRequest()" value="LOGIN"/></p>
+        <div id="login_screen" style="display:contents;">
+            <div id="loginBox">
+            <p>USERNAME: <input type="text" id="WikiName" placeholder="Enter WikiName"></p> 
+            <p>PASSWORD: <input type="password" id="password" placeholder="Enter password"></p> 
+            <div id="fail_login" style="display:none;">
+                <p>FAILED LOGIN: WRONG PASSWORD</p>
+            </div>
+            <p><input type="button" id="loginButton" onclick="makeRequest()" value="LOGIN"/></p>
+            </div>
         </div>
-      </div> -->
-    <div id="Action_screen" style="display:contents;">
-        <p>HELLO, WikiName<span type="text" id="WikiName"></span></p>
-        <p>SUM = <span type="text" id="sumScore">0</span></p>
-        <p>
-            git-0 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-0" placeholder="Enter Rank"/><br>
-            git-1 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-1" placeholder="Enter Rank"/><br>
-            git-2 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-2" placeholder="Enter Rank"/><br>
-            git-3 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-3" placeholder="Enter Rank"/><br>
-            git-4 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-4" placeholder="Enter Rank"/><br>
-            git-5 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-5" placeholder="Enter Rank"/><br>
-            git-6 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-6" placeholder="Enter Rank"/><br>
-            git-7 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-7" placeholder="Enter Rank"/><br>
-            git-8 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-8" placeholder="Enter Rank"/><br>
-            git-9 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-9" placeholder="Enter Rank"/><br>
-            git-10 <input onchange="updateSubTotal()" type="number" name="score" id="git-10" placeholder="Enter Rank"/><br>
-            git-11 <input onchange="updateSubTotal()" type="number" name="score" id="git-11" placeholder="Enter Rank"/><br>
-            git-12 <input onchange="updateSubTotal()" type="number" name="score" id="git-12" placeholder="Enter Rank"/><br>
-            git-13 <input onchange="updateSubTotal()" type="number" name="score" id="git-13" placeholder="Enter Rank"/><br>
-            git-14 <input onchange="updateSubTotal()" type="number" name="score" id="git-14" placeholder="Enter Rank"/><br>
-            git-15 <input onchange="updateSubTotal()" type="number" name="score" id="git-15" placeholder="Enter Rank"/><br>
-            git-16 <input onchange="updateSubTotal()" type="number" name="score" id="git-16" placeholder="Enter Rank"/><br>
-            git-17 <input onchange="updateSubTotal()" type="number" name="score" id="git-17" placeholder="Enter Rank"/><br>
-            git-18 <input onchange="updateSubTotal()" type="number" name="score" id="git-18" placeholder="Enter Rank"/><br>
-            git-19 <input onchange="updateSubTotal()" type="number" name="score" id="git-19" placeholder="Enter Rank"/><br>
-            git-20 <input onchange="updateSubTotal()" type="number" name="score" id="git-20" placeholder="Enter Rank"/><br>
-            git-21 <input onchange="updateSubTotal()" type="number" name="score" id="git-21" placeholder="Enter Rank"/><br>
-            git-22 <input onchange="updateSubTotal()" type="number" name="score" id="git-22" placeholder="Enter Rank"/><br>
-            git-23 <input onchange="updateSubTotal()" type="number" name="score" id="git-23" placeholder="Enter Rank"/><br>
-        </p> 
-    </div>
+        <div id="setDetails" style="display:none;">
+            <div id="loginBox">
+              <p>Max Sum: <input type="number" id="maxSum" placeholder="Enter Rank"></p> 
+              <p>Max Rank: <input type="number" id="maxRank" placeholder="Enter Rank"></p> 
+              <p><input type="button" id="setButton" onclick="setDetail()" value="SET"/></p>
+            </div>
+          </div>
+        <div id="Action_screen" style="display:none;">
+            <p>HELLO, <span type="text" id="WikiName"></span></p>
+            <p>SUM = <span type="text" id="sumScore">0</span></p>
+            <p>
+                git-0 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-0" placeholder="Enter Rank"/><br>
+                git-1 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-1" placeholder="Enter Rank"/><br>
+                git-2 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-2" placeholder="Enter Rank"/><br>
+                git-3 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-3" placeholder="Enter Rank"/><br>
+                git-4 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-4" placeholder="Enter Rank"/><br>
+                git-5 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-5" placeholder="Enter Rank"/><br>
+                git-6 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-6" placeholder="Enter Rank"/><br>
+                git-7 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-7" placeholder="Enter Rank"/><br>
+                git-8 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-8" placeholder="Enter Rank"/><br>
+                git-9 &nbsp;&nbsp;<input onchange="updateSubTotal()" type="number" name="score" id="git-9" placeholder="Enter Rank"/><br>
+                git-10 <input onchange="updateSubTotal()" type="number" name="score" id="git-10" placeholder="Enter Rank"/><br>
+                git-11 <input onchange="updateSubTotal()" type="number" name="score" id="git-11" placeholder="Enter Rank"/><br>
+                git-12 <input onchange="updateSubTotal()" type="number" name="score" id="git-12" placeholder="Enter Rank"/><br>
+                git-13 <input onchange="updateSubTotal()" type="number" name="score" id="git-13" placeholder="Enter Rank"/><br>
+                git-14 <input onchange="updateSubTotal()" type="number" name="score" id="git-14" placeholder="Enter Rank"/><br>
+                git-15 <input onchange="updateSubTotal()" type="number" name="score" id="git-15" placeholder="Enter Rank"/><br>
+                git-16 <input onchange="updateSubTotal()" type="number" name="score" id="git-16" placeholder="Enter Rank"/><br>
+                git-17 <input onchange="updateSubTotal()" type="number" name="score" id="git-17" placeholder="Enter Rank"/><br>
+                git-18 <input onchange="updateSubTotal()" type="number" name="score" id="git-18" placeholder="Enter Rank"/><br>
+                git-19 <input onchange="updateSubTotal()" type="number" name="score" id="git-19" placeholder="Enter Rank"/><br>
+                git-20 <input onchange="updateSubTotal()" type="number" name="score" id="git-20" placeholder="Enter Rank"/><br>
+                git-21 <input onchange="updateSubTotal()" type="number" name="score" id="git-21" placeholder="Enter Rank"/><br>
+                git-22 <input onchange="updateSubTotal()" type="number" name="score" id="git-22" placeholder="Enter Rank"/><br>
+                git-23 <input onchange="updateSubTotal()" type="number" name="score" id="git-23" placeholder="Enter Rank"/><br>
+            </p> 
+            <p> message: <input type="text" id="message" placeholder="COMMAND >>" /> <p></p>
+        </div>
   </body>
   <script src="app.js"></script>  
 </html>
