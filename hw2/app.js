@@ -325,3 +325,13 @@ function removeRow(btn) {
     row.parentNode.removeChild(row);
 }
 
+function logout(){
+    document.getElementById("login_screen").style.display = "contents"
+    document.getElementById("fail_login").style.display = "none";
+    document.getElementById("WikiName").value = ""
+    document.getElementById("password").value = ""
+    document.getElementById('setDetails').style.display = "none";
+    document.getElementById('Auction_screen').style.display = "none";
+    document.getElementById('Results').style.display = "none";
+}
+

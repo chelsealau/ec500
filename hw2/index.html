@@ -25,7 +25,7 @@
             <div id="loginBox">
               <p>MAX SUM: <input type="number" id="maxSum" placeholder="Enter max sum"></p> 
               <p>MAX RANK: <input type="number" id="maxRank" placeholder="Enter max rank"></p> 
-              <p><input type="button" id="setButton" onclick="setDetail()" value="SET"/></p>
+              <p><input type="button" id="setButton" onclick="setDetail()" value="SET"/><input type="button" onclick="logout()" id="logOut" value="logout"></p>
             </div>
           </div>
         <div id="Auction_screen" style="display:none;">
@@ -47,6 +47,7 @@
         <p> 
           <input type="button" onclick="saveRanks()" id="saveRanks" value="SUBMIT"/>
           <input type="button" onclick="auctionBack()" id="auctionBack" value="BACK"> 
+          <input type="button" onclick="logout()" id="logOut" value="logout">
         </p>
       </div>
     <div id="Results" style="display:none;">
@@ -54,7 +55,7 @@
       <h4> SUBMISSION: </h4>
       <p> <span type="text" id="results"></span> </p> 
       <p> SUM = <span type="text" id="resultSum"></span></p>
-      <input type="button" onclick="resultsBack()" id="resultsBack" value="RESUBMIT">
+      <input type="button" onclick="resultsBack()" id="resultsBack" value="RESUBMIT"><input type="button" onclick="logout()" id="logOut" value="logout">
     </div>
   </body>
   <script src="app.js"></script>  
