@@ -63,6 +63,7 @@ const makeRequest = async () => {
 
 async function checkLogin() {
     let requestRes = await makeRequest();
+    console.log(requestRes)
     if (!(requestRes.includes("ERROR"))) {
         if (document.getElementById("login_screen").style.display == "contents" && requestRes) {
             document.getElementById("login_screen").style.display = "none";
@@ -158,7 +159,7 @@ function updateSubTotal() {
             tot += parseInt(arr[i].value);
             arr[i].style.backgroundColor = "#ffffff";
             if (parseInt(arr[i].value) < 0 || parseInt(arr[i].value) > parseInt(document.getElementById('maxRank').value)){
-                alert((i+1)+ "st CHOICE\nRANK IS OUT OF RANGE(0-"+document.getElementById('maxRank').value+")");
+                alert("CHOICE "+(i+1)+"\nRANK IS OUT OF RANGE(0-"+document.getElementById('maxRank').value+")");
                 arr[i].style.backgroundColor = "#d9361a";
             }
         }
@@ -176,18 +177,37 @@ function updateSubTotal() {
 
 async function saveRanks() {
     let res_map = new Map();
-    document.getElementById('Auction_screen').style.display = "none";
-    document.getElementById('Results').style.display = "contents";
     document.getElementById('resultSum').innerHTML = document.getElementById('sumScore').innerHTML;
     // let res_list = document.getElementById('results_list');
     // res_list.innerHTML = "";
     let score_arr = document.getElementsByName('score');
     let name_arr = document.getElementsByName('itemName');
-
+    var noName = "";
+    var noRank = "";
     for (var i=0; i < score_arr.length; i++) {
+        if (name_arr[i].value==""){
+            noName = noName+(i+1)+" ";
+        } 
+        if (score_arr[i].value=="") {
+            noRank = noRank+(i+1)+" ";
+        }
         res_map.set(name_arr[i].value, score_arr[i].value);
     }
 
+    if (noName!=""&&noRank!=""){
+        alert("No Name in choices: "+noName+"\nN0 Rank in choices: "+noRank);
+        return;
+    }
+    else if (noName!=""){
+        alert("No Name in choices: "+noName);
+        return;
+    }
+    else if (noRank!=""){
+        alert("No Rank in choices: "+noRank);
+        return;
+    }
+    document.getElementById('Auction_screen').style.display = "none";
+    document.getElementById('Results').style.display = "contents";
     // console.log(res_map);
     let obj = Object.fromEntries(res_map);
     let jsonString = JSON.stringify(obj);
