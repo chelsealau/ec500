@@ -65,6 +65,10 @@ const makeRequest = async () => {
     }
 }
 
+/**
+ * create salt that will be added on to the password
+ * @returns salt
+ */
 function salt_Password() {
     const n = 32;
     var lettersSetArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", 
@@ -133,6 +137,11 @@ function md5(salt) {
     return rh(a)+rh(b)+rh(c)+rh(d);
 }
 
+/**
+ * add the ranks to get the sum
+ * if a rank is larger than the set max rank, create alert and make background red
+ * if a sum is larger than the set max sum, create alert and make background red
+ */
 function updateSubTotal() {
     document.getElementById('sumScore').style.backgroundColor = "#ffffff00";
     var arr = document.getElementsByName('score');
@@ -200,7 +209,10 @@ function navAuction() {
     document.getElementById("setDetails").style.display = "contents";
 }
 
-
+/**
+ * set max sum of ranks and max value of each individual rank
+ * if not inputed, create alert and stay on page
+ */
 function setDetail(){
     if ((document.getElementById("maxSum").value=="")&&(document.getElementById("maxRank").value=="")){
         alert("No Max Sum and Rank")
@@ -221,6 +233,9 @@ function setDetail(){
     
 };
 
+/**
+ * add row to table in order to insert new choices and their
+ */
 function addRow() {
     var table = document.getElementById("itemTable");
     var num_rows = document.getElementById("itemTable").rows.length;
@@ -247,6 +262,9 @@ function addRow() {
     cell1.appendChild(buttonItem1);
 }
 
+/**
+ * remove unnecessary row from table
+ */
 function removeRow(btn) {
     var row = btn.parentNode.parentNode;
     row.parentNode.removeChild(row);
