@@ -52,12 +52,11 @@
                     </tr>
                     <tr>
                       <td id="col0"><input type="text" name="itemName" placeholder="Enter Name"/></td>
-                      <td id="col1"><input onchange="updateSubTotal()" type="number" name="score" placeholder="Enter Rank"/>
+                      <td id="col1"><input onchange="updateSubTotal()" type="number" name="score" placeholder="Enter Rank"/><input type="button" onclick="removeRow(this)" value="Remove Row"/>
                     </tr>
                 </table>
                 <input type="button" onclick="addRow()" id="addRowButton" value="Add Row"/>
             </p>
-        <p> <input type="button" onclick="saveRanks()" id="submitValues" value="SUBMIT"/> 
         <input type="button" onclick="auctionBack()" id="auctionBack" value="BACK"></p>
       </div>
     <div id="Results" style="display:none;">

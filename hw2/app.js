@@ -224,6 +224,10 @@ function addRow() {
     inputItem1.setAttribute('onchange','updateSubTotal()')
     inputItem1.setAttribute('type','number')
 
+    var buttonItem1 = document.createElement('button');
+    buttonItem1.innerHTML = "Remove Row"
+    buttonItem1.setAttribute('onclick','removeRow(this)')
+
     var row = table.insertRow(num_rows);
     var cell0 = row.insertCell(0);
     cell0.appendChild(inputItem0);
@@ -232,5 +236,8 @@ function addRow() {
     cell1.appendChild(buttonItem1);
 }
 
-
+function removeRow(btn) {
+    var row = btn.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+}
 
