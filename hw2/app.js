@@ -4,6 +4,7 @@
  * https://www.geeksforgeeks.org/how-to-creating-html-list-from-javascript-array/
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
  * https://www.tutorialkart.com/javascript/javascript-convert-map-to-json-string/#:~:text=To%20convert%20a%20map%20to,stringify()%20method.
+ * https://stackoverflow.com/questions/610406/javascript-equivalent-to-printf-string-format
  */
 
 'use strict';
@@ -172,10 +173,10 @@ function updateSubTotal() {
 
 }
 
-function saveRanks() {
+async function saveRanks() {
     let res_map = new Map();
     document.getElementById('Auction_screen').style.display = "none";
-    document.getElementById('Results').style.display = "list-item";
+    document.getElementById('Results').style.display = "contents";
     document.getElementById('resultSum').innerHTML = document.getElementById('sumScore').innerHTML;
     // let res_list = document.getElementById('results_list');
     // res_list.innerHTML = "";
@@ -191,9 +192,22 @@ function saveRanks() {
     let jsonString = JSON.stringify(obj);
     let name = document.getElementById("WikiName").value;
     console.log(name);
-    document.getElementById("message").value = `SET ${name} ${jsonString}`
-    let requestRes = makeRequest();
-    console.log(requestRes);
+    document.getElementById("message").value = `SET ${name} ${jsonString}`;
+    // console.log(document.getElementById("message").value);
+    makeRequest();
+    document.getElementById("message").value = `GET ${name}`;
+    const requestRes = await makeRequest();
+    // console.log(requestRes);
+    var jsObject = JSON.parse(requestRes);
+    // console.log(jsObject);
+    var resultString = '';
+    for (var key in jsObject) {
+        // console.log(key);
+        resultString += key + ' ' + jsObject[key] + "<br />";
+    }
+    console.log(resultString);
+    document.getElementById("results").innerHTML = resultString;
+    // console.log(requestRes);
     // // need to convert gitIDs to an element before I can retrieve 
     // score_arr.forEach((item) => {
     //     // console.log(item.value);
