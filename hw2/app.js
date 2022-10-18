@@ -202,12 +202,23 @@ function navAuction() {
 
 
 function setDetail(){
-    var status = confirm("Are you ok with the settings?")
-    if (status){
-        document.getElementById("setDetails").style.display = "none";
-        document.getElementById("Auction_screen").style.display = "contents";
+    if ((document.getElementById("maxSum").value=="")&&(document.getElementById("maxRank").value=="")){
+        alert("No Max Sum and Rank")
+        return NaN
+    } else if (document.getElementById("maxSum").value=="") {
+        alert("No Max Sum")
+        return NaN
+    } else if (document.getElementById("maxRank").value=="") {
+        alert("No Max Rank")
+        return NaN
+    } else {
+        var status = confirm("Are you ok with the settings?")
+        if (status){
+            document.getElementById("setDetails").style.display = "none";
+            document.getElementById("Auction_screen").style.display = "contents";
+        }
     }
-    document.getElementById("Auction_screen").style.display = "contents";
+    
 };
 
 function addRow() {
