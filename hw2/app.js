@@ -42,12 +42,12 @@ document.getElementById("maxRank")
 })
 
 const makeRequest = async () => {
-    var js_mess = document.getElementById("message").value;
-    var js_salt = salt_Password();
-    var js_hash = md5(js_salt);
-    var data = {"salt" : js_salt, "hash" : js_hash, "message" : js_mess };
-    var url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
-    var searchParams = new URLSearchParams(data);
+    let js_mess = document.getElementById("message").value;
+    let js_salt = salt_Password();
+    let js_hash = md5(js_salt);
+    let data = {"salt" : js_salt, "hash" : js_hash, "message" : js_mess };
+    let url = new URL("https://agile.bu.edu/ec500_scripts/redis.php");
+    let searchParams = new URLSearchParams(data);
     url.search = searchParams.toString();
     const response = await fetch(url);
     if (response.ok) {
@@ -187,10 +187,13 @@ function saveRanks() {
     }
 
     // console.log(res_map);
-    var obj = Object.fromEntries(res_map);
-    var jsonString = JSON.stringify(obj);
-
-
+    let obj = Object.fromEntries(res_map);
+    let jsonString = JSON.stringify(obj);
+    let name = document.getElementById("WikiName").value;
+    console.log(name);
+    document.getElementById("message").value = `SET ${name} ${jsonString}`
+    let requestRes = makeRequest();
+    console.log(requestRes);
     // // need to convert gitIDs to an element before I can retrieve 
     // score_arr.forEach((item) => {
     //     // console.log(item.value);
