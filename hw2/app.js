@@ -2,7 +2,8 @@
  * https://developer.mozilla.org/en-US/docs/Web/CSS/display
  * https://stackoverflow.com/questions/66774779/how-do-you-clear-a-list-in-javascript-i-e-delete-all-items-in-a-list-with-one
  * https://www.geeksforgeeks.org/how-to-creating-html-list-from-javascript-array/
- * 
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+ * https://www.tutorialkart.com/javascript/javascript-convert-map-to-json-string/#:~:text=To%20convert%20a%20map%20to,stringify()%20method.
  */
 
 'use strict';
@@ -56,15 +57,19 @@ const makeRequest = async () => {
     }
     text = text.split("Result:");
     const result = text[text.length-1]
-    if (document.getElementById("login_screen").style.display == "contents" && result) {
+    return result
+}
+
+function checkLogin() {
+    let requestRes = makeRequest();
+    if (document.getElementById("login_screen").style.display == "contents" && requestRes) {
         document.getElementById("login_screen").style.display = "none";
-        document.getElementById("menu_screen").style.display = "contents";
+        document.getElementById("setDetails").style.display = "contents";
         document.getElementById("displayName").innerHTML = document.getElementById("WikiName").value;
     } else if(document.getElementById("login_screen").style.display){
         document.getElementById("fail_login").style.display = "contents";
     }
 }
-
 /**
  * create salt that will be added on to the password
  * @returns salt
@@ -168,19 +173,31 @@ function updateSubTotal() {
 }
 
 function saveRanks() {
+    let res_map = new Map();
     document.getElementById('Auction_screen').style.display = "none";
     document.getElementById('Results').style.display = "list-item";
     document.getElementById('resultSum').innerHTML = document.getElementById('sumScore').innerHTML;
-    let res_list = document.getElementById('results_list');
-    res_list.innerHTML = "";
+    // let res_list = document.getElementById('results_list');
+    // res_list.innerHTML = "";
     let score_arr = document.getElementsByName('score');
-    // need to convert gitIDs to an element before I can retrieve 
-    score_arr.forEach((item) => {
-        // console.log(item.value);
-        let li = document.createElement("li");
-        li.innerHTML = item.value;
-        res_list.appendChild(li);
-    });
+    let name_arr = document.getElementsByName('itemName');
+
+    for (var i=0; i < score_arr.length; i++) {
+        res_map.set(name_arr[i].value, score_arr[i].value);
+    }
+
+    // console.log(res_map);
+    var obj = Object.fromEntries(res_map);
+    var jsonString = JSON.stringify(obj);
+
+
+    // // need to convert gitIDs to an element before I can retrieve 
+    // score_arr.forEach((item) => {
+    //     // console.log(item.value);
+    //     let li = document.createElement("li");
+    //     li.innerHTML = item.value;
+    //     res_list.appendChild(li);
+    // });
     
 }
 
@@ -191,23 +208,23 @@ function resultsBack() {
 
 function auctionBack() {
     document.getElementById('Auction_screen').style.display = "none";
-    document.getElementById('menu_screen').style.display = "contents";
+    document.getElementById('setDetails').style.display = "contents";
 }
 
-function commandBack() {
-    document.getElementById('server_screen').style.display = "none";
-    document.getElementById('menu_screen').style.display = "contents";
-}
+// function commandBack() {
+//     document.getElementById('server_screen').style.display = "none";
+//     document.getElementById('menu_screen').style.display = "contents";
+// }
 
-function navCommand() {
-    document.getElementById("menu_screen").style.display = "none";
-    document.getElementById("server_screen").style.display = "contents";
-}
+// function navCommand() {
+//     document.getElementById("menu_screen").style.display = "none";
+//     document.getElementById("server_screen").style.display = "contents";
+// }
 
-function navAuction() {
-    document.getElementById("menu_screen").style.display = "none";
-    document.getElementById("setDetails").style.display = "contents";
-}
+// function navAuction() {
+//     document.getElementById("menu_screen").style.display = "none";
+//     document.getElementById("setDetails").style.display = "contents";
+// }
 
 /**
  * set max sum of ranks and max value of each individual rank
