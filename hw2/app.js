@@ -61,15 +61,16 @@ const makeRequest = async () => {
     return result
 }
 
-function checkLogin() {
-    let requestRes = makeRequest();
-    if (document.getElementById("login_screen").style.display == "contents" && requestRes) {
-        document.getElementById("login_screen").style.display = "none";
-        document.getElementById("setDetails").style.display = "contents";
-        document.getElementById("displayName").innerHTML = document.getElementById("WikiName").value;
-    } else if(document.getElementById("login_screen").style.display){
-        document.getElementById("fail_login").style.display = "contents";
+async function checkLogin() {
+    let requestRes = await makeRequest();
+    if (!(requestRes.includes("ERROR"))) {
+        if (document.getElementById("login_screen").style.display == "contents" && requestRes) {
+            document.getElementById("login_screen").style.display = "none";
+            document.getElementById("setDetails").style.display = "contents";
+            document.getElementById("displayName").innerHTML = document.getElementById("WikiName").value;
+        }
     }
+    document.getElementById("fail_login").style.display = "contents";
 }
 /**
  * create salt that will be added on to the password
