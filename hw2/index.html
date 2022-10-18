@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="main.css">
   </head>
   <body>
-    <h1> Group Auction </h1>   
+    <h1> GROUP AUCTION </h1>   
     <h2> - GROUP 6 - </h2>
         <div id="login_screen" style="display:contents;">
             <div id="loginBox">
-            <p>USERNAME: <input type="text" id="WikiName" placeholder="Enter WikiName"></p> 
+            <p>WIKINAME: <input type="text" id="WikiName" placeholder="Enter WikiName"></p> 
             <p>PASSWORD: <input type="password" id="password" placeholder="Enter password"></p> 
             <div id="fail_login" style="display:none;">
                 <p>FAILED LOGIN: WRONG PASSWORD</p>
@@ -53,11 +53,11 @@
                     </tr>
                     <tr>
                       <td id="col0"><input type="text" name="itemName" placeholder="Enter Name"/></td>
-                      <td id="col1"><input onchange="updateSubTotal()" type="number" name="score" placeholder="Enter Rank"/><input type="button" onclick="removeRow(this)" value="Remove Row"/>
+                      <td id="col1"><input onchange="updateSubTotal()" type="number" name="score" placeholder="Enter Rank"/> <input type="button" name="removeButton" onclick="removeRow(this)" value="Remove Row"/>
                     </tr>
                 </table>
-                <input type="button" onclick="addRow()" id="addRowButton" value="Add Row"/>
             </p>
+            <input type="button" onclick="addRow()" id="addRowButton" value="Add Row"/>
         <p> 
           <input type="button" onclick="saveRanks()" id="saveRanks" value="SUBMIT"/>
           <input type="button" onclick="auctionBack()" id="auctionBack" value="BACK"> 
