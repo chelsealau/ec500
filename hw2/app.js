@@ -67,7 +67,7 @@ async function checkLogin() {
     if (!(requestRes.includes("ERROR"))) {
         if (document.getElementById("login_screen").style.display == "contents" && requestRes) {
             document.getElementById("login_screen").style.display = "none";
-            document.getElementById("setDetails").style.display = "contents";
+            document.getElementById("menu_screen").style.display = "contents";
             document.getElementById("displayName").innerHTML = document.getElementById("WikiName").value;
         }
     }
@@ -169,7 +169,7 @@ function updateSubTotal() {
         alert("SUM OF RANK IS OVER "+parseInt(document.getElementById('maxSum').value))
     }
     if (tot<parseInt(document.getElementById('maxSum').value)) {
-        alert("WARNING: SUM OF RANK DOES NOT ADD UP TO SUM");
+        alert("WARNING: SUM OF RANK DOES NOT ADD UP TO MAX SUM");
     }
     if (tot<0) {
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
@@ -198,7 +198,7 @@ async function saveRanks() {
     }
 
     if (noName!=""&&noRank!=""){
-        alert("No Name in choices: "+noName+"\nN0 Rank in choices: "+noRank);
+        alert("No Name in choices: "+noName+"\nNo Rank in choices: "+noRank);
         return;
     }
     else if (noName!=""){
@@ -224,18 +224,43 @@ async function saveRanks() {
     for (var key in jsObject) {
         resultString += key + ' ' + jsObject[key] + "<br />";
     }
-    console.log(resultString);
+    // console.log(resultString);
     document.getElementById("results").innerHTML = resultString;
 }
 
 function resultsBack() {
     document.getElementById('Auction_screen').style.display = "contents";
     document.getElementById('Results').style.display = "none";
+    document.getElementById('history_screen').style.display = "none";
 }
 
 function auctionBack() {
     document.getElementById('Auction_screen').style.display = "none";
     document.getElementById('setDetails').style.display = "contents";
+}
+
+async function navHistory() {
+    let name = document.getElementById("WikiName").value;
+    document.getElementById("menu_screen").style.display = "none";
+    document.getElementById("message").value = `GET ${name}`;
+    const requestRes = await makeRequest();
+    
+    try {
+        var jsObject = JSON.parse(requestRes);
+        var resultString = '';
+        for (var key in jsObject) {
+        resultString += key + ' ' + jsObject[key] + "<br />";
+        }
+        document.getElementById("history").innerHTML = resultString;
+    } catch (error) {
+        document.getElementById("history").innerHTML = "NO PREVIOUS SUBMISSION";
+    }
+    document.getElementById("history_screen").style.display = "contents";
+}
+
+function navDetails() {
+    document.getElementById("menu_screen").style.display = "none";
+    document.getElementById("setDetails").style.display = "contents";
 }
 
 /**
@@ -316,5 +341,6 @@ function logout(){
     document.getElementById('setDetails').style.display = "none";
     document.getElementById('Auction_screen').style.display = "none";
     document.getElementById('Results').style.display = "none";
+    document.getElementById('history_screen').style.display = "none";
 }
 
