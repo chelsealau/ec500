@@ -9,6 +9,10 @@
 
 'use strict';
 
+/**
+ * click loginButton when KEY ENTER is pressed 
+ * while cursor is on input box password
+ */
 document.getElementById("password")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
@@ -18,6 +22,10 @@ document.getElementById("password")
     }
 })
 
+/**
+ * click loginButton when KEY ENTER is pressed 
+ * while cursor is on input box WikiName
+ */
 document.getElementById("WikiName")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
@@ -25,7 +33,10 @@ document.getElementById("WikiName")
         document.getElementById("loginButton").click();
     }
 })
-
+/**
+ * click loginButton when KEY ENTER is pressed 
+ * while cursor is on input box maxSun
+ */
 document.getElementById("maxSum")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
@@ -33,7 +44,10 @@ document.getElementById("maxSum")
         document.getElementById("setButton").click();
     }
 })
-
+/**
+ * click loginButton when KEY ENTER is pressed 
+ * while cursor is on input box maxRank
+ */
 document.getElementById("maxRank")
     .addEventListener("keyup", function(event) {
     event.preventDefault();
@@ -42,6 +56,10 @@ document.getElementById("maxRank")
     }
 })
 
+/**
+ * attepnt to use the Redis Server with inputed password
+ * @returns if successful return "" else return with "ERROR"
+ */
 const makeRequest = async () => {
     let js_mess = document.getElementById("message").value;
     let js_salt = salt_Password();
@@ -61,9 +79,11 @@ const makeRequest = async () => {
     return result
 }
 
+/**
+ * check if password is valid
+ */
 async function checkLogin() {
     let requestRes = await makeRequest();
-    console.log(requestRes)
     if (!(requestRes.includes("ERROR"))) {
         if (document.getElementById("login_screen").style.display == "contents" && requestRes) {
             document.getElementById("login_screen").style.display = "none";
@@ -99,8 +119,12 @@ function salt_Password() {
     return salt;
 };
 
-//  A formatted version of a popular md5 implementation.
-//  Original copyright (c) Paul Johnston & Greg Holt.
+/**
+ * A formatted version of a popular md5 implementation.
+ * Original copyright (c) Paul Johnston & Greg Holt.
+ * @param {*} salt salt that will be added to the password before encrypted
+ * @returns encrypted password
+ */
 function md5(salt) {
     var inputString = salt + document.getElementById("password").value 
     var hc="0123456789abcdef";
@@ -175,11 +199,15 @@ function updateSubTotal() {
 
 }
 
+/**
+ * check for invalid name or rank in input box
+ * send input data to Redis Server
+ * retrive data from Redis Server to be presented 
+ * @returns if invalid Name or Rank in input box
+ */
 async function saveRanks() {
     let res_map = new Map();
     document.getElementById('resultSum').innerHTML = document.getElementById('sumScore').innerHTML;
-    // let res_list = document.getElementById('results_list');
-    // res_list.innerHTML = "";
     let score_arr = document.getElementsByName('score');
     let name_arr = document.getElementsByName('itemName');
     var noName = "";
@@ -208,61 +236,20 @@ async function saveRanks() {
     }
     document.getElementById('Auction_screen').style.display = "none";
     document.getElementById('Results').style.display = "contents";
-    // console.log(res_map);
     let obj = Object.fromEntries(res_map);
     let jsonString = JSON.stringify(obj);
     let name = document.getElementById("WikiName").value;
-    console.log(name);
     document.getElementById("message").value = `SET ${name} ${jsonString}`;
-    // console.log(document.getElementById("message").value);
     makeRequest();
     document.getElementById("message").value = `GET ${name}`;
     const requestRes = await makeRequest();
-    // console.log(requestRes);
     var jsObject = JSON.parse(requestRes);
-    // console.log(jsObject);
     var resultString = '';
     for (var key in jsObject) {
-        // console.log(key);
         resultString += key + ' ' + jsObject[key] + "<br />";
     }
-    console.log(resultString);
     document.getElementById("results").innerHTML = resultString;
-    // console.log(requestRes);
-    // // need to convert gitIDs to an element before I can retrieve 
-    // score_arr.forEach((item) => {
-    //     // console.log(item.value);
-    //     let li = document.createElement("li");
-    //     li.innerHTML = item.value;
-    //     res_list.appendChild(li);
-    // });
-    
 }
-
-function resultsBack() {
-    document.getElementById('Auction_screen').style.display = "contents";
-    document.getElementById('Results').style.display = "none";
-}
-
-function auctionBack() {
-    document.getElementById('Auction_screen').style.display = "none";
-    document.getElementById('setDetails').style.display = "contents";
-}
-
-// function commandBack() {
-//     document.getElementById('server_screen').style.display = "none";
-//     document.getElementById('menu_screen').style.display = "contents";
-// }
-
-// function navCommand() {
-//     document.getElementById("menu_screen").style.display = "none";
-//     document.getElementById("server_screen").style.display = "contents";
-// }
-
-// function navAuction() {
-//     document.getElementById("menu_screen").style.display = "none";
-//     document.getElementById("setDetails").style.display = "contents";
-// }
 
 /**
  * set max sum of ranks and max value of each individual rank
@@ -325,6 +312,10 @@ function removeRow(btn) {
     row.parentNode.removeChild(row);
 }
 
+
+/**
+ * logout from website to go to login page
+ */
 function logout(){
     document.getElementById("login_screen").style.display = "contents"
     document.getElementById("fail_login").style.display = "none";
@@ -335,3 +326,12 @@ function logout(){
     document.getElementById('Results').style.display = "none";
 }
 
+function resultsBack() {
+    document.getElementById('Auction_screen').style.display = "contents";
+    document.getElementById('Results').style.display = "none";
+}
+
+function auctionBack() {
+    document.getElementById('Auction_screen').style.display = "none";
+    document.getElementById('setDetails').style.display = "contents";
+}
