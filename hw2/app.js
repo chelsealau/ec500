@@ -18,7 +18,6 @@ document.getElementById("password")
     event.preventDefault();
     if (event.keyCode === 13) {
         document.getElementById("loginButton").click();
-        
     }
 })
 
@@ -256,7 +255,6 @@ async function saveRanks() {
     for (var key in jsObject) {
         resultString += key + ' ' + jsObject[key] + "<br />";
     }
-    // console.log(resultString);
     document.getElementById("results").innerHTML = resultString;
 }
 
@@ -301,7 +299,6 @@ function setDetail(){
         alert("ERROR: No Max Rank")
         return NaN
     } else if (parseInt(maxRank, 10) > parseInt(maxSum, 10)) {
-        // console.log(typeof(maxRank), typeof(maxSum));
         alert("ERROR: Max Rank cannot be greater than Max Sum")
         return NaN
     } else if ((parseInt(maxRank, 10) <= 0) || (parseInt(maxSum, 10)) <= 0) {
