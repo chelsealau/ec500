@@ -34,7 +34,7 @@ document.getElementById("WikiName")
     }
 })
 /**
- * click loginButton when KEY ENTER is pressed 
+ * click SET when KEY ENTER is pressed 
  * while cursor is on input box maxSun
  */
 document.getElementById("maxSum")
@@ -45,7 +45,7 @@ document.getElementById("maxSum")
     }
 })
 /**
- * click loginButton when KEY ENTER is pressed 
+ * click SET when KEY ENTER is pressed 
  * while cursor is on input box maxRank
  */
 document.getElementById("maxRank")
@@ -175,7 +175,7 @@ function md5(salt) {
  * if a sum is larger than the set max sum, create alert and make background red
  */
 function updateSubTotal() {
-    document.getElementById('sumScore').style.backgroundColor = "#ffffff00";
+    // document.getElementById('sumScore').style.backgroundColor = "#ffffff00";
     var arr = document.getElementsByName('score');
     var tot=0;
     for(var i=0;i<arr.length;i++){
@@ -227,15 +227,15 @@ async function saveRanks() {
 
     if (noName!=""&&noRank!=""){
         alert("No Name in choices: "+noName+"\nNo Rank in choices: "+noRank);
-        return;
+        return NaN;
     }
     else if (noName!=""){
         alert("No Name in choices: "+noName);
-        return;
+        return NaN;
     }
     else if (noRank!=""){
         alert("No Rank in choices: "+noRank);
-        return;
+        return NaN;
     }
     document.getElementById('Auction_screen').style.display = "none";
     document.getElementById('Results').style.display = "contents";
@@ -246,11 +246,16 @@ async function saveRanks() {
     makeRequest();
     document.getElementById("message").value = `GET ${name}`;
     const requestRes = await makeRequest();
-    var jsObject = JSON.parse(requestRes);
-    var resultString = '';
-    for (var key in jsObject) {
-        resultString += key + ' ' + jsObject[key] + "<br />";
+    try {
+        var jsObject = JSON.parse(requestRes);
+        var resultString = '';
+        for (var key in jsObject) {
+            resultString += key + ' ' + jsObject[key] + "<br />";
+        }
+    } catch(error) {
+        return;
     }
+    
     // console.log(resultString);
     document.getElementById("results").innerHTML = resultString;
 }
@@ -299,20 +304,20 @@ function setDetail(){
     let maxRank = document.getElementById("maxRank").value;
     if ((maxSum == "")&&(maxRank == "")){
         alert("ERROR: No Max Sum and Rank")
-        return NaN
+        return "SET_ERROR";
     } else if (maxSum == "") {
         alert("ERROR: No Max Sum")
-        return NaN
+        return "SET_ERROR";
     } else if (maxRank == "") {
         alert("ERROR: No Max Rank")
-        return NaN
+        return "SET_ERROR";
     } else if (parseInt(maxRank, 10) > parseInt(maxSum, 10)) {
         // console.log(typeof(maxRank), typeof(maxSum));
         alert("ERROR: Max Rank cannot be greater than Max Sum")
-        return NaN
+        return "SET_ERROR";
     } else if ((parseInt(maxRank, 10) <= 0) || (parseInt(maxSum, 10)) <= 0) {
         alert("ERROR: Values cannot be zero or negative")
-        return NaN
+        return "SET_ERROR";
     }
     else {
         var status = confirm("Are you ok with the settings?")

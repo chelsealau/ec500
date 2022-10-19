@@ -101,6 +101,10 @@ input[name="removeButton"], #addRowButton {
   overflow-y: scroll;
 }
 
+#sumScore {
+  background-color: #ffffff00;
+}
+
 /**References
 * https://css-tricks.com/the-shapes-of-css/
 * https://unsplash.com/photos/QWutu2BRpOs?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink
