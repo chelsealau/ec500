@@ -192,9 +192,6 @@ function updateSubTotal() {
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
         alert("SUM OF RANK IS OVER "+parseInt(document.getElementById('maxSum').value))
     }
-    if (tot<parseInt(document.getElementById('maxSum').value)) {
-        alert("WARNING: SUM OF RANK DOES NOT ADD UP TO SUM");
-    }
     if (tot<0) {
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
         alert("SUM OF RANK IS UNDER 0")
@@ -236,6 +233,11 @@ async function saveRanks() {
     else if (noRank!=""){
         alert("No Rank in choices: "+noRank);
         return;
+    } else if (document.getElementById('sumScore').innerHTML<parseInt(document.getElementById('maxSum').value)) {
+        var status = confirm("WARNING: SUM OF RANK DOES NOT ADD UP TO SUM");
+        if (!status){
+            return;
+        }
     }
     document.getElementById('Auction_screen').style.display = "none";
     document.getElementById('Results').style.display = "contents";
@@ -271,13 +273,12 @@ function setDetail(){
         alert("ERROR: No Max Rank")
         return NaN
     } else if (parseInt(maxRank, 10) > parseInt(maxSum, 10)) {
-        // console.log(typeof(maxRank), typeof(maxSum));
         alert("ERROR: Max Rank cannot be greater than Max Sum")
         return NaN
     } else if ((parseInt(maxRank, 10) <= 0) || (parseInt(maxSum, 10)) <= 0) {
         alert("ERROR: Values cannot be zero or negative")
         return NaN
-    }
+    } 
     else {
         var status = confirm("Are you ok with the settings?")
         if (status){
