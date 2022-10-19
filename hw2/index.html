@@ -12,8 +12,8 @@
     <h2> - GROUP 6 - </h2>
         <div id="login_screen" style="display:contents;">
             <div id="loginBox">
-            <p>WIKINAME: <input type="text" id="WikiName" placeholder="Enter WikiName"></p> 
-            <p>PASSWORD: <input type="password" id="password" placeholder="Enter password"></p> 
+              <p>WIKINAME: <input type="text" id="WikiName" placeholder="Enter WikiName"></p> 
+              <p>PASSWORD: <input type="password" id="password" placeholder="Enter password"></p> 
             <div id="fail_login" style="display:none;">
                 <p>FAILED LOGIN: WRONG PASSWORD</p>
             </div>
@@ -21,11 +21,23 @@
             <input type="hidden" id="message" value=""/>
             </div>
         </div>
+        <div id="menu_screen" style="display:none;">
+          <input type="button" onclick="navHistory()" id="historyButton" value="VIEW LAST SUBMISSION"/>
+          <input type="button" onclick="navDetails()" id="detailsButton" value="NEW AUCTION"/>
+        </div>
+        <div id="history_screen" style="display:none;">
+          <div id="historyBox">
+            <p> <span type="text" id="history"></span> </p> 
+          </div> 
+          <input type="button" onclick="resultsBack()" id="resultsBack" value="RESUBMIT">
+          <input type="button" onclick="logout()" id="logOut" value="LOGOUT">
+        </div>
         <div id="setDetails" style="display:none;">
             <div id="loginBox">
               <p>MAX SUM: <input type="number" id="maxSum" placeholder="Enter max sum"></p> 
               <p>MAX RANK: <input type="number" id="maxRank" placeholder="Enter max rank"></p> 
-              <p><input type="button" id="setButton" onclick="setDetail()" value="SET"/><input type="button" onclick="logout()" id="logOut" value="logout"></p>
+              <p><input type="button" id="setButton" onclick="setDetail()" value="SET"/>
+                <input type="button" onclick="logout()" id="logOut" value="LOGOUT"></p>
             </div>
           </div>
         <div id="Auction_screen" style="display:none;">
@@ -47,7 +59,7 @@
         <p> 
           <input type="button" onclick="saveRanks()" id="saveRanks" value="SUBMIT"/>
           <input type="button" onclick="auctionBack()" id="auctionBack" value="BACK"> 
-          <input type="button" onclick="logout()" id="logOut" value="logout">
+          <input type="button" onclick="logout()" id="logOut" value="LOGOUT">
         </p>
       </div>
     <div id="Results" style="display:none;">
@@ -55,7 +67,8 @@
       <h4> SUBMISSION: </h4>
       <p> <span type="text" id="results"></span> </p> 
       <p> SUM = <span type="text" id="resultSum"></span></p>
-      <input type="button" onclick="resultsBack()" id="resultsBack" value="RESUBMIT"><input type="button" onclick="logout()" id="logOut" value="logout">
+      <input type="button" onclick="resultsBack()" id="resultsBack" value="RESUBMIT">
+      <input type="button" onclick="logout()" id="logOut" value="LOGOUT">
     </div>
   </body>
   <script src="app.js"></script>  

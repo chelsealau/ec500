@@ -87,7 +87,7 @@ async function checkLogin() {
     if (!(requestRes.includes("ERROR"))) {
         if (document.getElementById("login_screen").style.display == "contents" && requestRes) {
             document.getElementById("login_screen").style.display = "none";
-            document.getElementById("setDetails").style.display = "contents";
+            document.getElementById("menu_screen").style.display = "contents";
             document.getElementById("displayName").innerHTML = document.getElementById("WikiName").value;
         }
     }
@@ -192,6 +192,9 @@ function updateSubTotal() {
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
         alert("SUM OF RANK IS OVER "+parseInt(document.getElementById('maxSum').value))
     }
+    if (tot<parseInt(document.getElementById('maxSum').value)) {
+        alert("WARNING: SUM OF RANK DOES NOT ADD UP TO MAX SUM");
+    }
     if (tot<0) {
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
         alert("SUM OF RANK IS UNDER 0")
@@ -223,7 +226,7 @@ async function saveRanks() {
     }
 
     if (noName!=""&&noRank!=""){
-        alert("No Name in choices: "+noName+"\nN0 Rank in choices: "+noRank);
+        alert("No Name in choices: "+noName+"\nNo Rank in choices: "+noRank);
         return;
     }
     else if (noName!=""){
@@ -253,7 +256,32 @@ async function saveRanks() {
     for (var key in jsObject) {
         resultString += key + ' ' + jsObject[key] + "<br />";
     }
+    // console.log(resultString);
     document.getElementById("results").innerHTML = resultString;
+}
+
+async function navHistory() {
+    let name = document.getElementById("WikiName").value;
+    document.getElementById("menu_screen").style.display = "none";
+    document.getElementById("message").value = `GET ${name}`;
+    const requestRes = await makeRequest();
+    
+    try {
+        var jsObject = JSON.parse(requestRes);
+        var resultString = '';
+        for (var key in jsObject) {
+        resultString += key + ' ' + jsObject[key] + "<br />";
+        }
+        document.getElementById("history").innerHTML = resultString;
+    } catch (error) {
+        document.getElementById("history").innerHTML = "NO PREVIOUS SUBMISSION";
+    }
+    document.getElementById("history_screen").style.display = "contents";
+}
+
+function navDetails() {
+    document.getElementById("menu_screen").style.display = "none";
+    document.getElementById("setDetails").style.display = "contents";
 }
 
 /**
@@ -273,12 +301,13 @@ function setDetail(){
         alert("ERROR: No Max Rank")
         return NaN
     } else if (parseInt(maxRank, 10) > parseInt(maxSum, 10)) {
+        // console.log(typeof(maxRank), typeof(maxSum));
         alert("ERROR: Max Rank cannot be greater than Max Sum")
         return NaN
     } else if ((parseInt(maxRank, 10) <= 0) || (parseInt(maxSum, 10)) <= 0) {
         alert("ERROR: Values cannot be zero or negative")
         return NaN
-    } 
+    }
     else {
         var status = confirm("Are you ok with the settings?")
         if (status){
@@ -337,13 +366,15 @@ function logout(){
     document.getElementById('setDetails').style.display = "none";
     document.getElementById('Auction_screen').style.display = "none";
     document.getElementById('Results').style.display = "none";
+    document.getElementById('history_screen').style.display = "none";
 }
 /**
  * display Auction_screen page and hide Results page
  */
-function resultsBack() {
+ function resultsBack() {
     document.getElementById('Auction_screen').style.display = "contents";
     document.getElementById('Results').style.display = "none";
+    document.getElementById('history_screen').style.display = "none";
 }
 /**
  * display setDetails page and hide Auction_screen page
