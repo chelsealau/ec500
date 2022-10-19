@@ -80,6 +80,13 @@ input[name="removeButton"], #addRowButton {
   font-size: large;
 }
 
+#logOut {
+  color: #555555;
+  background-color: white;
+  font-size: larger;
+  left: 50px;
+}
+
 /* #message {
   font-family: monospace;
   font-size: larger;
