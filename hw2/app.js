@@ -168,7 +168,10 @@ function updateSubTotal() {
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
         alert("SUM OF RANK IS OVER "+parseInt(document.getElementById('maxSum').value))
     }
-    if (tot<0){
+    if (tot<parseInt(document.getElementById('maxSum').value)) {
+        alert("WARNING: SUM OF RANK DOES NOT ADD UP TO SUM");
+    }
+    if (tot<0) {
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
         alert("SUM OF RANK IS UNDER 0")
     }
@@ -208,35 +211,21 @@ async function saveRanks() {
     }
     document.getElementById('Auction_screen').style.display = "none";
     document.getElementById('Results').style.display = "contents";
-    // console.log(res_map);
     let obj = Object.fromEntries(res_map);
     let jsonString = JSON.stringify(obj);
     let name = document.getElementById("WikiName").value;
     console.log(name);
     document.getElementById("message").value = `SET ${name} ${jsonString}`;
-    // console.log(document.getElementById("message").value);
     makeRequest();
     document.getElementById("message").value = `GET ${name}`;
     const requestRes = await makeRequest();
-    // console.log(requestRes);
     var jsObject = JSON.parse(requestRes);
-    // console.log(jsObject);
     var resultString = '';
     for (var key in jsObject) {
-        // console.log(key);
         resultString += key + ' ' + jsObject[key] + "<br />";
     }
     console.log(resultString);
     document.getElementById("results").innerHTML = resultString;
-    // console.log(requestRes);
-    // // need to convert gitIDs to an element before I can retrieve 
-    // score_arr.forEach((item) => {
-    //     // console.log(item.value);
-    //     let li = document.createElement("li");
-    //     li.innerHTML = item.value;
-    //     res_list.appendChild(li);
-    // });
-    
 }
 
 function resultsBack() {
@@ -249,44 +238,38 @@ function auctionBack() {
     document.getElementById('setDetails').style.display = "contents";
 }
 
-// function commandBack() {
-//     document.getElementById('server_screen').style.display = "none";
-//     document.getElementById('menu_screen').style.display = "contents";
-// }
-
-// function navCommand() {
-//     document.getElementById("menu_screen").style.display = "none";
-//     document.getElementById("server_screen").style.display = "contents";
-// }
-
-// function navAuction() {
-//     document.getElementById("menu_screen").style.display = "none";
-//     document.getElementById("setDetails").style.display = "contents";
-// }
-
 /**
  * set max sum of ranks and max value of each individual rank
  * if not inputed, create alert and stay on page
  */
 function setDetail(){
-    if ((document.getElementById("maxSum").value=="")&&(document.getElementById("maxRank").value=="")){
-        alert("No Max Sum and Rank")
+    let maxSum = document.getElementById("maxSum").value;
+    let maxRank = document.getElementById("maxRank").value;
+    if ((maxSum == "")&&(maxRank == "")){
+        alert("ERROR: No Max Sum and Rank")
         return NaN
-    } else if (document.getElementById("maxSum").value=="") {
-        alert("No Max Sum")
+    } else if (maxSum == "") {
+        alert("ERROR: No Max Sum")
         return NaN
-    } else if (document.getElementById("maxRank").value=="") {
-        alert("No Max Rank")
+    } else if (maxRank == "") {
+        alert("ERROR: No Max Rank")
         return NaN
-    } else {
+    } else if (parseInt(maxRank, 10) > parseInt(maxSum, 10)) {
+        // console.log(typeof(maxRank), typeof(maxSum));
+        alert("ERROR: Max Rank cannot be greater than Max Sum")
+        return NaN
+    } else if ((parseInt(maxRank, 10) <= 0) || (parseInt(maxSum, 10)) <= 0) {
+        alert("ERROR: Values cannot be zero or negative")
+        return NaN
+    }
+    else {
         var status = confirm("Are you ok with the settings?")
         if (status){
             document.getElementById("setDetails").style.display = "none";
             document.getElementById("Auction_screen").style.display = "contents";
         }
     }
-    
-};
+}
 
 /**
  * add row to table in order to insert new choices and their
