@@ -18,7 +18,6 @@ document.getElementById("password")
     event.preventDefault();
     if (event.keyCode === 13) {
         document.getElementById("loginButton").click();
-        
     }
 })
 
@@ -93,6 +92,7 @@ async function checkLogin() {
     }
     document.getElementById("fail_login").style.display = "contents";
 }
+
 /**
  * create salt that will be added on to the password
  * @returns salt
@@ -199,7 +199,6 @@ function updateSubTotal() {
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
         alert("SUM OF RANK IS UNDER 0")
     }
-
 }
 
 /**
@@ -236,8 +235,14 @@ async function saveRanks() {
     else if (noRank!=""){
         alert("No Rank in choices: "+noRank);
         return NaN;
+    } else if (document.getElementById('sumScore').innerHTML<parseInt(document.getElementById('maxSum').value)) {
+        var status = confirm("WARNING: SUM OF RANK DOES NOT ADD UP TO SUM");
+        if (!status){
+            return;
+        }
     }
     document.getElementById('Auction_screen').style.display = "none";
+
     document.getElementById('Results').style.display = "contents";
     let obj = Object.fromEntries(res_map);
     let jsonString = JSON.stringify(obj);
@@ -255,20 +260,7 @@ async function saveRanks() {
     } catch(error) {
         return;
     }
-    
-    // console.log(resultString);
     document.getElementById("results").innerHTML = resultString;
-}
-
-function resultsBack() {
-    document.getElementById('Auction_screen').style.display = "contents";
-    document.getElementById('Results').style.display = "none";
-    document.getElementById('history_screen').style.display = "none";
-}
-
-function auctionBack() {
-    document.getElementById('Auction_screen').style.display = "none";
-    document.getElementById('setDetails').style.display = "contents";
 }
 
 async function navHistory() {
@@ -292,6 +284,7 @@ async function navHistory() {
 
 function navDetails() {
     document.getElementById("menu_screen").style.display = "none";
+    document.getElementById("history_screen").style.display = "none";
     document.getElementById("setDetails").style.display = "contents";
 }
 
@@ -312,7 +305,6 @@ function setDetail(){
         alert("ERROR: No Max Rank")
         return "SET_ERROR";
     } else if (parseInt(maxRank, 10) > parseInt(maxSum, 10)) {
-        // console.log(typeof(maxRank), typeof(maxSum));
         alert("ERROR: Max Rank cannot be greater than Max Sum")
         return "SET_ERROR";
     } else if ((parseInt(maxRank, 10) <= 0) || (parseInt(maxSum, 10)) <= 0) {
@@ -322,6 +314,9 @@ function setDetail(){
     else {
         var status = confirm("Are you ok with the settings?")
         if (status){
+            navHistory() ;
+            document.getElementById("HistoryresultsBack").style.display = "none";
+            document.getElementById("HistorylogOut").style.display = "none";
             document.getElementById("setDetails").style.display = "none";
             document.getElementById("Auction_screen").style.display = "contents";
         }
@@ -379,13 +374,19 @@ function logout(){
     document.getElementById('Results').style.display = "none";
     document.getElementById('history_screen').style.display = "none";
 }
-
-function resultsBack() {
+/**
+ * display Auction_screen page and hide Results page
+ */
+ function resultsBack() {
     document.getElementById('Auction_screen').style.display = "contents";
     document.getElementById('Results').style.display = "none";
+    document.getElementById('history_screen').style.display = "none";
 }
-
+/**
+ * display setDetails page and hide Auction_screen page
+ */
 function auctionBack() {
     document.getElementById('Auction_screen').style.display = "none";
+    document.getElementById("history_screen").style.display = "none";
     document.getElementById('setDetails').style.display = "contents";
 }
