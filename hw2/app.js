@@ -92,6 +92,7 @@ async function checkLogin() {
     }
     document.getElementById("fail_login").style.display = "contents";
 }
+
 /**
  * create salt that will be added on to the password
  * @returns salt
@@ -198,7 +199,6 @@ function updateSubTotal() {
         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
         alert("SUM OF RANK IS UNDER 0")
     }
-
 }
 
 /**
@@ -279,6 +279,7 @@ async function navHistory() {
 
 function navDetails() {
     document.getElementById("menu_screen").style.display = "none";
+    document.getElementById("history_screen").style.display = "none";
     document.getElementById("setDetails").style.display = "contents";
 }
 
