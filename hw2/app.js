@@ -309,6 +309,9 @@ function setDetail(){
     else {
         var status = confirm("Are you ok with the settings?")
         if (status){
+            navHistory() 
+            document.getElementById("HistoryresultsBack").style.display = "none";
+            document.getElementById("HistorylogOut").style.display = "none";
             document.getElementById("setDetails").style.display = "none";
             document.getElementById("Auction_screen").style.display = "contents";
         }
