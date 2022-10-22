@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EC500_HW2</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <h1> GROUP AUCTION </h1>   
+    <h2> - GROUP 6 - </h2>
+        <!-- <div id="login_screen" style="display:contents;">
+            <div id="loginBox">
+              <p>WIKINAME: <input type="text" id="WikiName" placeholder="Enter WikiName"></p> 
+              <p>PASSWORD: <input type="password" id="password" placeholder="Enter password"></p> 
+            <div id="fail_login" style="display:none;">
+                <p>FAILED LOGIN: WRONG PASSWORD</p>
+            </div>
+            <p><input type="button" id="loginButton" onclick="checkLogin()" value="LOGIN"/></p>
+            <input type="hidden" id="message" value=""/>
+            </div>
+        </div>
+        <div id="setDetails" style="display:none;">
+            <div id="loginBox">
+              <p>MAX SUM: <input type="number" id="maxSum" placeholder="Enter max sum"></p> 
+              <p>MAX RANK: <input type="number" id="maxRank" placeholder="Enter max rank"></p> 
+              <p><input type="button" id="setButton" onclick="setDetail()" value="SET"/>
+                <input type="button" onclick="logout()" id="logOut" value="LOGOUT"></p>
+            </div>
+          </div> -->
+        <div id="auction_screen" style="display:contents;">
+            <p>WikiName: <span type="text" id="displayName"></span></p>
+            <p>SUM = <span type="text" id="sumScore">0</span></p>
+            <p>
+                <table id="itemTable">
+                    <tr>
+                      <th>Name</th>
+                      <th>Rank</th> 
+                    </tr>
+                    <tr>
+                      <td id="col0"><input type="text" name="itemName" placeholder="Enter Name"/></td>
+                      <td id="col1"><input onchange="updateSubTotal()" type="number" name="score" placeholder="Enter Rank"/> <input type="button" name="removeButton" onclick="removeRow(this)" value="Remove Row"/>
+                    </tr>
+                </table>
+            </p>
+            <input type="button" onclick="addRow()" id="addRowButton" value="Add Row"/>
+            <p> 
+                <table id="rankMatrix">
+                    <tr>
+                        <td>cell1</td>
+                        <td>cell2</td>
+                    </tr>
+                </table>
+            </p>
+            <p>
+            <input type="button" onclick="saveRanks()" id="saveRanks" value="SUBMIT"/>
+            <input type="button" onclick="auctionBack()" id="auctionBack" value="BACK"> 
+            <input type="button" onclick="logout()" id="logOut" value="LOGOUT">
+            </p>
+      </div>
+  </body>
+  <script src="batch_Sub.js"></script> 
+  <!-- <script src="test.js"></script>  -->
+</html>

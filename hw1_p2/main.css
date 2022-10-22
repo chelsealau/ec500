@@ -1,0 +1,116 @@
+html {
+  /* font-family:Arial, Helvetica, sans-serif; */
+  font-family: monospace;
+  font-size: larger;
+  color: #555555;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: table;
+  background: url("background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-size: larger;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+h1, h2 {
+  top: 20px;
+  color: #555555;
+  text-align: center;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+#loginBox {
+  color: #555555;
+  font-weight: bold;
+  font-size: large;
+  border-style: solid;
+  border-color: white;
+  border-width: 5px;
+  border-left-width: 35px;
+  background-color: #ebebeb;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 75px;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width: 300px;
+}
+
+th {
+  text-align: left;
+}
+
+input {
+  font-family: monospace;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  color: #555555;
+  border-color: white;
+  height: 30px;
+}
+
+input[type="button"] {
+  font-family: monospace;
+  font-weight: bolder;
+  color: white;
+  background-color: #555555;
+  border-radius: 10px;
+  border-color: white;
+  font-size: larger;
+}
+
+input[name="removeButton"], #addRowButton {
+  color: #555555;
+  background-color: white;
+  font-size: large;
+}
+
+#logOut {
+  color: #555555;
+  background-color: white;
+  font-size: larger;
+  left: 50px;
+}
+
+#historyBox {
+  align-items: center;
+  width: 500px;
+  height: 300px;
+  background: transparent;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  left: 5%;
+  bottom: 5%;
+  color: #555555;
+  overflow-y: scroll;
+}
+
+#sumScore {
+  background-color: #ffffff00;
+}
+
+#rankMatrix {
+  border: solid;
+}
+
+/**References
+* https://css-tricks.com/the-shapes-of-css/
+* https://unsplash.com/photos/QWutu2BRpOs?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink
+* https://css-tricks.com/perfect-full-page-background-image/
+*/
