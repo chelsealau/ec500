@@ -340,12 +340,18 @@
         inputItem1.setAttribute('placeholder','Enter Rank')
         inputItem1.setAttribute('onchange','updateSubTotal()')
         inputItem1.setAttribute('type','text')
+        var inputItem2 = document.createElement('span')
+        inputItem2.setAttribute('type','text')
+        inputItem2.innerHTML = 0
+        inputItem2.setAttribute('id', i)
 
         var row = table.insertRow(-1);
         var cell0 = row.insertCell(0);
         cell0.appendChild(inputItem0);
         var cell1 = row.insertCell(1);
         cell1.appendChild(inputItem1);
+        var cell2 = row.insertCell(2);
+        cell1.appendChild(inputItem2);
      }
      
  }
