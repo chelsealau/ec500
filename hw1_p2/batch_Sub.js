@@ -179,16 +179,25 @@
     var score_arr = document.getElementsByName("score");
     var tot = 0;
     var maxSum = document.getElementById("maxSum").value;
+    var numUsers = document.getElementById("numUsers").value;
 
     for (var i=0; i < score_arr.length; i++) {
         tot = 0;
         var row_arr = JSON.parse("[" + score_arr[i].value + "]");
+        if (row_arr.length != numUsers) {
+            alert(`ERROR: Row must contain a ranking for every user (${numUsers} users)`)
+            score_arr[i].style.backgroundColor = "#d9361a";
+        }
         for (var j=0; j < row_arr.length; j++) {
+            if (j == i && row_arr[j] != 0) {
+                alert(`ERROR: USER MUST RANK THEMSELVES 0`);
+                score_arr[i].style.backgroundColor = "#d9361a";
+            }
             tot += row_arr[j]; 
         } 
         console.log(tot);
         if (tot < maxSum) {
-            alert(`Row must sum up to ${maxSum}`);
+            alert(`ERROR: Row must sum up to ${maxSum}`);
             score_arr[i].style.backgroundColor = "#d9361a";
         }
     }
