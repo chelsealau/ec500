@@ -13,47 +13,47 @@
   * click loginButton when KEY ENTER is pressed 
   * while cursor is on input box password
   */
- document.getElementById("password")
-     .addEventListener("keyup", function(event) {
-     event.preventDefault();
-     if (event.keyCode === 13) {
-         document.getElementById("loginButton").click();
-     }
- })
+//  document.getElementById("password")
+//      .addEventListener("keyup", function(event) {
+//      event.preventDefault();
+//      if (event.keyCode === 13) {
+//          document.getElementById("loginButton").click();
+//      }
+//  })
  
- /**
-  * click loginButton when KEY ENTER is pressed 
-  * while cursor is on input box WikiName
-  */
- document.getElementById("WikiName")
-     .addEventListener("keyup", function(event) {
-     event.preventDefault();
-     if (event.keyCode === 13) {
-         document.getElementById("loginButton").click();
-     }
- })
- /**
-  * click SET when KEY ENTER is pressed 
-  * while cursor is on input box maxSun
-  */
- document.getElementById("maxSum")
-     .addEventListener("keyup", function(event) {
-     event.preventDefault();
-     if (event.keyCode === 13) {
-         document.getElementById("setButton").click();
-     }
- })
- /**
-  * click SET when KEY ENTER is pressed 
-  * while cursor is on input box maxRank
-  */
- document.getElementById("maxRank")
-     .addEventListener("keyup", function(event) {
-     event.preventDefault();
-     if (event.keyCode === 13) {
-         document.getElementById("setButton").click();
-     }
- })
+//  /**
+//   * click loginButton when KEY ENTER is pressed 
+//   * while cursor is on input box WikiName
+//   */
+//  document.getElementById("WikiName")
+//      .addEventListener("keyup", function(event) {
+//      event.preventDefault();
+//      if (event.keyCode === 13) {
+//          document.getElementById("loginButton").click();
+//      }
+//  })
+//  /**
+//   * click SET when KEY ENTER is pressed 
+//   * while cursor is on input box maxSun
+//   */
+//  document.getElementById("maxSum")
+//      .addEventListener("keyup", function(event) {
+//      event.preventDefault();
+//      if (event.keyCode === 13) {
+//          document.getElementById("setButton").click();
+//      }
+//  })
+//  /**
+//   * click SET when KEY ENTER is pressed 
+//   * while cursor is on input box maxRank
+//   */
+//  document.getElementById("maxRank")
+//      .addEventListener("keyup", function(event) {
+//      event.preventDefault();
+//      if (event.keyCode === 13) {
+//          document.getElementById("setButton").click();
+//      }
+//  })
  
  /**
   * attepnt to use the Redis Server with inputed password
@@ -176,29 +176,30 @@
   */
  function updateSubTotal() {
      // document.getElementById('sumScore').style.backgroundColor = "#ffffff00";
-     var arr = document.getElementsByName('score');
-     var tot=0;
-     for(var i=0;i<arr.length;i++){
-         if(parseInt(arr[i].value))
-             tot += parseInt(arr[i].value);
-             arr[i].style.backgroundColor = "#ffffff";
-             if (parseInt(arr[i].value) < 0 || parseInt(arr[i].value) > parseInt(document.getElementById('maxRank').value)){
-                 alert("CHOICE "+(i+1)+"\nRANK IS OUT OF RANGE(0-"+document.getElementById('maxRank').value+")");
-                 arr[i].style.backgroundColor = "#d9361a";
-             }
-         }
-     document.getElementById('sumScore').innerHTML = tot;
-     if (tot>parseInt(document.getElementById('maxSum').value)){
-         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
-         alert("SUM OF RANK IS OVER "+parseInt(document.getElementById('maxSum').value))
-     }
-     if (tot<parseInt(document.getElementById('maxSum').value)) {
-         alert("WARNING: SUM OF RANK DOES NOT ADD UP TO MAX SUM");
-     }
-     if (tot<0) {
-         document.getElementById('sumScore').style.backgroundColor = "#d9361a";
-         alert("SUM OF RANK IS UNDER 0")
-     }
+    var score_arr = document.getElementsByName("score");
+    var tot = 0;
+    var maxSum = document.getElementById("maxSum").value;
+    var row_arr = JSON.parse("[" + score_arr[score_arr.length - 1].value + "]");
+    console.log(row_arr)
+    for (var i=0; i < row_arr.length; i++) {
+        tot += row_arr[i]; 
+    }
+    console.log(tot);
+    console.log(maxSum);
+    if (tot < maxSum) {
+        alert(`Row must sum up to ${maxSum}`);
+        score_arr[score_arr.length - 1].style.backgroundColor = "#d9361a";
+    }
+ }
+
+ async function storeMatrix() {
+    var score_arr = document.getElementsByName("score");
+    var name_arr = document.getElementsByName("itemName");
+    // var rowMap = {};
+    for (var i=0; i < score_arr.length; i++) {
+        document.getElementById("message").value = `SET ${name} ${jsonString}`;
+        makeRequest();
+    }
  }
  
  /**
@@ -314,11 +315,9 @@
      else {
          var status = confirm("Are you ok with the settings?")
          if (status){
-             navHistory() ;
-             document.getElementById("HistoryresultsBack").style.display = "none";
-             document.getElementById("HistorylogOut").style.display = "none";
              document.getElementById("setDetails").style.display = "none";
-             document.getElementById("Auction_screen").style.display = "contents";
+             addRow();
+             document.getElementById("auction_screen").style.display = "contents";
          }
      }
  }
@@ -327,38 +326,37 @@
   * add row to table in order to insert new choices and their
   */
  function addRow() {
-     var table = document.getElementById("itemTable");
-     var num_rows = document.getElementById("itemTable").rows.length;
- 
-     var inputItem0 = document.createElement('input');
-     inputItem0.setAttribute('name','itemName')
-     inputItem0.setAttribute('placeholder','Enter Name')
- 
-     var inputItem1 = document.createElement('input');
-     inputItem1.setAttribute('name','score')
-     inputItem1.setAttribute('placeholder','Enter Rank')
-     inputItem1.setAttribute('onchange','updateSubTotal()')
-     inputItem1.setAttribute('type','number')
- 
-     var buttonItem1 = document.createElement('button');
-     buttonItem1.innerHTML = "Remove Row"
-     buttonItem1.setAttribute('onclick','removeRow(this)')
- 
-     var row = table.insertRow(num_rows);
-     var cell0 = row.insertCell(0);
-     cell0.appendChild(inputItem0);
-     var cell1 = row.insertCell(1);
-     cell1.appendChild(inputItem1);
-     cell1.appendChild(buttonItem1);
+    var target = document.getElementById("numUsers").value;
+    console.log(target)
+    var table = document.getElementById("itemTable");
+    // var num_rows = document.getElementById("itemTable").rows.length;
+    
+     for (var i = 1; i < target; i++) {
+        var inputItem0 = document.createElement('input');
+        inputItem0.setAttribute('name','itemName')
+        inputItem0.setAttribute('placeholder','Enter Name')
+        var inputItem1 = document.createElement('input');
+         inputItem1.setAttribute('name','score')
+        inputItem1.setAttribute('placeholder','Enter Rank')
+        inputItem1.setAttribute('onchange','updateSubTotal()')
+        inputItem1.setAttribute('type','number')
+
+        var row = table.insertRow(-1);
+        var cell0 = row.insertCell(0);
+        cell0.appendChild(inputItem0);
+        var cell1 = row.insertCell(1);
+        cell1.appendChild(inputItem1);
+     }
+     
  }
  
  /**
   * remove unnecessary row from table
   */
- function removeRow(btn) {
-     var row = btn.parentNode.parentNode;
-     row.parentNode.removeChild(row);
- }
+//  function removeRow(btn) {
+//      var row = btn.parentNode.parentNode;
+//      row.parentNode.removeChild(row);
+//  }
  
  
  /**

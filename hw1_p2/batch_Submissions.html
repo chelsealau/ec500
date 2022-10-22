@@ -21,17 +21,19 @@
             <input type="hidden" id="message" value=""/>
             </div>
         </div>
-        <div id="setDetails" style="display:none;">
+    -->
+        <div id="setDetails" style="display:contents;">
             <div id="loginBox">
               <p>MAX SUM: <input type="number" id="maxSum" placeholder="Enter max sum"></p> 
               <p>MAX RANK: <input type="number" id="maxRank" placeholder="Enter max rank"></p> 
+              <p> NUMBER OF USERS: <input type="number" id="numUsers" placeholder="Enter number of users"</p>
               <p><input type="button" id="setButton" onclick="setDetail()" value="SET"/>
                 <input type="button" onclick="logout()" id="logOut" value="LOGOUT"></p>
-            </div>
-          </div> -->
-        <div id="auction_screen" style="display:contents;">
+            </div> 
+          </div> 
+        <div id="auction_screen" style="display:none;">
             <p>WikiName: <span type="text" id="displayName"></span></p>
-            <p>SUM = <span type="text" id="sumScore">0</span></p>
+            <!-- <p>SUM = <span type="text" id="sumScore">0</span></p> -->
             <p>
                 <table id="itemTable">
                     <tr>
@@ -40,7 +42,7 @@
                     </tr>
                     <tr>
                       <td id="col0"><input type="text" name="itemName" placeholder="Enter Name"/></td>
-                      <td id="col1"><input onchange="updateSubTotal()" type="number" name="score" placeholder="Enter Rank"/> <input type="button" name="removeButton" onclick="removeRow(this)" value="Remove Row"/>
+                      <td id="col1"><input onchange="updateSubTotal()" type="text" name="score" placeholder="Enter Rank"/>
                     </tr>
                 </table>
             </p>
