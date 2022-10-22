@@ -339,7 +339,7 @@
          inputItem1.setAttribute('name','score')
         inputItem1.setAttribute('placeholder','Enter Rank')
         inputItem1.setAttribute('onchange','updateSubTotal()')
-        inputItem1.setAttribute('type','number')
+        inputItem1.setAttribute('type','text')
 
         var row = table.insertRow(-1);
         var cell0 = row.insertCell(0);
