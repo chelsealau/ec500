@@ -180,28 +180,58 @@
     var tot = 0;
     var maxSum = document.getElementById("maxSum").value;
     var numUsers = document.getElementById("numUsers").value;
+    var max_alert="", empty_alert="", zero_alert="";
 
     for (var i=0; i < score_arr.length; i++) {
         tot = 0;
         var row_arr = JSON.parse("[" + score_arr[i].value + "]");
         if (row_arr.length != numUsers) {
-            alert(`ERROR: Row must contain a ranking for every user (${numUsers} users)`)
+            empty_alert += (i+1)+" "
             score_arr[i].style.backgroundColor = "#d9361a";
         }
         for (var j=0; j < row_arr.length; j++) {
             if (j == i && row_arr[j] != 0) {
-                alert(`ERROR: USER MUST RANK THEMSELVES 0`);
+                zero_alert += (i+1)+" "
                 score_arr[i].style.backgroundColor = "#d9361a";
             }
             tot += row_arr[j]; 
         } 
-        console.log(tot);
-        if (tot < maxSum) {
-            alert(`ERROR: Row must sum up to ${maxSum}`);
+        if (tot != maxSum) {
+            max_alert += (i+1)+" "
             score_arr[i].style.backgroundColor = "#d9361a";
         }
     }
+    if (max_alert){
+        alert(`ERROR: Row must sum up to ${maxSum}\nRow: `+max_alert);
+    }
+    if (zero_alert){
+        alert(`ERROR: USER MUST RANK THEMSELVES 0\nRow: `+zero_alert);
+    }
+    if (empty_alert){
+        alert(`ERROR: Row must contain a ranking for every user (${numUsers} users)\nRow: `+empty_alert)
+    }
  }
+ function sumRank() {
+    // document.getElementById('sumScore').style.backgroundColor = "#ffffff00";
+   var score_arr = document.getElementsByName("score");
+   var maxSum = document.getElementById("maxSum").value;
+   var tot;
+
+   for (var i=0; i < score_arr.length; i++) {
+       tot = 0;
+       var row_arr = JSON.parse("[" + score_arr[i].value + "]");
+
+       for (var j=0; j < row_arr.length; j++) {
+        tot += row_arr[j]; 
+       }
+       document.getElementsByName("sum")[i].innerHTML = tot
+       if (tot != maxSum) {
+        document.getElementsByName("sum")[i].style.color = "#d9361a";
+       } else {
+        document.getElementsByName("sum")[i].style.color = "#000000";
+       }
+    }
+}
 
  function genMatrix() {
     var matrix
@@ -349,7 +379,7 @@
     var table = document.getElementById("itemTable");
     // var num_rows = document.getElementById("itemTable").rows.length;
     
-     for (var i = 1; i < target; i++) {
+     for (var i = 0; i < target; i++) {
         var inputItem0 = document.createElement('input');
         inputItem0.setAttribute('name','itemName')
         inputItem0.setAttribute('placeholder','Enter Name')
@@ -357,12 +387,21 @@
          inputItem1.setAttribute('name','score')
         inputItem1.setAttribute('placeholder','Enter Rank')
         inputItem1.setAttribute('type','text')
+        inputItem1.onchange = function(){
+            sumRank();
+        }
+        var inputItem2 = document.createElement('span');
+        inputItem2.setAttribute('name','sum')
+        inputItem2.setAttribute('type','text')
+        inputItem2.innerHTML = 0
 
         var row = table.insertRow(-1);
         var cell0 = row.insertCell(0);
         cell0.appendChild(inputItem0);
         var cell1 = row.insertCell(1);
         cell1.appendChild(inputItem1);
+        var cell2 = row.insertCell(2);
+        cell2.appendChild(inputItem2);
      }
      
  }
