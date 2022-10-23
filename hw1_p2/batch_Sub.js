@@ -202,6 +202,22 @@
         }
     }
  }
+ function sumRank() {
+    // document.getElementById('sumScore').style.backgroundColor = "#ffffff00";
+   var score_arr = document.getElementsByName("score");
+   var tot;
+
+   for (var i=0; i < score_arr.length; i++) {
+       tot = 0;
+       var row_arr = JSON.parse("[" + score_arr[i].value + "]");
+
+       for (var j=0; j < row_arr.length; j++) {
+        tot += row_arr[j]; 
+       }
+       console.log(tot)
+       document.getElementsByName("sum")[i].innerHTML = tot
+    }
+}
 
  async function storeMatrix() {
     var score_arr = document.getElementsByName("score");
@@ -350,6 +366,9 @@
          inputItem1.setAttribute('name','score')
         inputItem1.setAttribute('placeholder','Enter Rank')
         inputItem1.setAttribute('type','text')
+        inputItem1.onchange = function(){
+            sumRank();
+        }
         var inputItem2 = document.createElement('span');
         inputItem2.setAttribute('name','sum')
         inputItem2.setAttribute('type','text')
