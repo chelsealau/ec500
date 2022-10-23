@@ -342,7 +342,7 @@
     var table = document.getElementById("itemTable");
     // var num_rows = document.getElementById("itemTable").rows.length;
     
-     for (var i = 1; i < target; i++) {
+     for (var i = 0; i < target; i++) {
         var inputItem0 = document.createElement('input');
         inputItem0.setAttribute('name','itemName')
         inputItem0.setAttribute('placeholder','Enter Name')
@@ -350,12 +350,18 @@
          inputItem1.setAttribute('name','score')
         inputItem1.setAttribute('placeholder','Enter Rank')
         inputItem1.setAttribute('type','text')
+        var inputItem2 = document.createElement('span');
+        inputItem2.setAttribute('name','sum')
+        inputItem2.setAttribute('type','text')
+        inputItem2.innerHTML = 0
 
         var row = table.insertRow(-1);
         var cell0 = row.insertCell(0);
         cell0.appendChild(inputItem0);
         var cell1 = row.insertCell(1);
         cell1.appendChild(inputItem1);
+        var cell2 = row.insertCell(2);
+        cell2.appendChild(inputItem2);
      }
      
  }
