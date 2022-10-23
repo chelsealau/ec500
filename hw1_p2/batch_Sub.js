@@ -32,28 +32,28 @@
 //          document.getElementById("loginButton").click();
 //      }
 //  })
-//  /**
-//   * click SET when KEY ENTER is pressed 
-//   * while cursor is on input box maxSun
-//   */
-//  document.getElementById("maxSum")
-//      .addEventListener("keyup", function(event) {
-//      event.preventDefault();
-//      if (event.keyCode === 13) {
-//          document.getElementById("setButton").click();
-//      }
-//  })
-//  /**
-//   * click SET when KEY ENTER is pressed 
-//   * while cursor is on input box maxRank
-//   */
-//  document.getElementById("maxRank")
-//      .addEventListener("keyup", function(event) {
-//      event.preventDefault();
-//      if (event.keyCode === 13) {
-//          document.getElementById("setButton").click();
-//      }
-//  })
+ /**
+  * click SET when KEY ENTER is pressed 
+  * while cursor is on input box maxSun
+  */
+ document.getElementById("maxSum")
+     .addEventListener("keyup", function(event) {
+     event.preventDefault();
+     if (event.keyCode === 13) {
+         document.getElementById("setButton").click();
+     }
+ })
+ /**
+  * click SET when KEY ENTER is pressed 
+  * while cursor is on input box maxRank
+  */
+ document.getElementById("maxRank")
+     .addEventListener("keyup", function(event) {
+     event.preventDefault();
+     if (event.keyCode === 13) {
+         document.getElementById("setButton").click();
+     }
+ })
  
  /**
   * attepnt to use the Redis Server with inputed password
@@ -179,16 +179,27 @@
     var score_arr = document.getElementsByName("score");
     var tot = 0;
     var maxSum = document.getElementById("maxSum").value;
-    var row_arr = JSON.parse("[" + score_arr[score_arr.length - 1].value + "]");
-    console.log(row_arr)
-    for (var i=0; i < row_arr.length; i++) {
-        tot += row_arr[i]; 
-    }
-    console.log(tot);
-    console.log(maxSum);
-    if (tot < maxSum) {
-        alert(`Row must sum up to ${maxSum}`);
-        score_arr[score_arr.length - 1].style.backgroundColor = "#d9361a";
+    var numUsers = document.getElementById("numUsers").value;
+
+    for (var i=0; i < score_arr.length; i++) {
+        tot = 0;
+        var row_arr = JSON.parse("[" + score_arr[i].value + "]");
+        if (row_arr.length != numUsers) {
+            alert(`ERROR: Row must contain a ranking for every user (${numUsers} users)`)
+            score_arr[i].style.backgroundColor = "#d9361a";
+        }
+        for (var j=0; j < row_arr.length; j++) {
+            if (j == i && row_arr[j] != 0) {
+                alert(`ERROR: USER MUST RANK THEMSELVES 0`);
+                score_arr[i].style.backgroundColor = "#d9361a";
+            }
+            tot += row_arr[j]; 
+        } 
+        console.log(tot);
+        if (tot < maxSum) {
+            alert(`ERROR: Row must sum up to ${maxSum}`);
+            score_arr[i].style.backgroundColor = "#d9361a";
+        }
     }
  }
 
@@ -338,12 +349,7 @@
         var inputItem1 = document.createElement('input');
          inputItem1.setAttribute('name','score')
         inputItem1.setAttribute('placeholder','Enter Rank')
-        inputItem1.setAttribute('onchange','updateSubTotal()')
         inputItem1.setAttribute('type','text')
-        var inputItem2 = document.createElement('span')
-        inputItem2.setAttribute('type','text')
-        inputItem2.innerHTML = 0
-        inputItem2.setAttribute('id', i)
 
         var row = table.insertRow(-1);
         var cell0 = row.insertCell(0);
