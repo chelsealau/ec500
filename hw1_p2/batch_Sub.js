@@ -203,12 +203,19 @@
     }
  }
 
+ function genMatrix() {
+    var matrix
+ }
+
  async function storeMatrix() {
     var score_arr = document.getElementsByName("score");
     var name_arr = document.getElementsByName("itemName");
     // var rowMap = {};
     for (var i=0; i < score_arr.length; i++) {
-        document.getElementById("message").value = `SET ${name} ${jsonString}`;
+        var name = name_arr[i].value;
+        var scoreString = score_arr[i].value;
+        console.log(name, scoreString);
+        document.getElementById("message").value = `SET ${name} ${scoreString}`;
         makeRequest();
     }
  }
@@ -329,7 +336,7 @@
              document.getElementById("setDetails").style.display = "none";
              addRow();
              document.getElementById("auction_screen").style.display = "contents";
-         }
+            }
      }
  }
  
