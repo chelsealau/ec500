@@ -5,6 +5,8 @@
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
  * https://www.tutorialkart.com/javascript/javascript-convert-map-to-json-string/#:~:text=To%20convert%20a%20map%20to,stringify()%20method.
  * https://stackoverflow.com/questions/610406/javascript-equivalent-to-printf-string-format
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+ * https://bobbyhadz.com/blog/javascript-replace-all-commas-in-string#:~:text=Use%20the%20replace()%20method,replaced%20by%20the%20provided%20replacement.&text=Copied!,-const%20str%20%3D%20'
  */
 
  'use strict';
@@ -203,13 +205,18 @@
     }
     if (max_alert){
         alert(`ERROR: Row must sum up to ${maxSum}\nRow: `+max_alert);
+        return;
     }
     if (zero_alert){
         alert(`ERROR: USER MUST RANK THEMSELVES 0\nRow: `+zero_alert);
+        return;
     }
     if (empty_alert){
         alert(`ERROR: Row must contain a ranking for every user (${numUsers} users)\nRow: `+empty_alert)
+        return;
     }
+
+    genMatrix();
  }
  function sumRank() {
     // document.getElementById('sumScore').style.backgroundColor = "#ffffff00";
@@ -234,7 +241,31 @@
 }
 
  function genMatrix() {
-    var matrix
+    var table = document.getElementById("rankMatrix");
+    table.innerHTML = '';
+    var target = document.getElementById("numUsers").value;
+    console.log(target)
+    var score_arr = document.getElementsByName("score");
+    var name_arr = document.getElementsByName("itemName");
+    
+     for (var i = 0; i < target; i++) {
+        var inputItem0 = document.createElement('span');
+        inputItem0.setAttribute('type', 'text');
+        inputItem0.setAttribute('name','userName');
+        var name_string = name_arr[i].value.replaceAll(',', ' ');
+        inputItem0.innerHTML = name_string;
+        var inputItem1 = document.createElement('span');
+        inputItem1.setAttribute('type','text');
+        inputItem1.setAttribute('name','scores');
+        var score_string = score_arr[i].value.replaceAll(',', ' ');
+        inputItem1.innerHTML = ' ' + score_string;
+
+        var row = table.insertRow(-1);
+        var cell0 = row.insertCell(0);
+        cell0.appendChild(inputItem0);
+        var cell1 = row.insertCell(1);
+        cell1.appendChild(inputItem1);
+     }
  }
 
  async function storeMatrix() {
