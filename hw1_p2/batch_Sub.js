@@ -269,11 +269,11 @@ function genMatrix() {
         inputItem1.setAttribute('type','text');
         inputItem1.setAttribute('name','scores');
         var score_string = score_arr[i].value.replaceAll(',', ' ');
-        var score_mat = score_arr[i].value.replaceAll(',', '');
-        for (var j=0; j<target; j++){
-            map_matrix[i][j] = 1;
-            matrix[i][j] = parseInt(score_mat[j])
-        }
+        // var score_mat = score_arr[i].value.replaceAll(',', '');
+        // for (var j=0; j<target; j++){
+        //     map_matrix[i][j] = 1;
+        //     matrix[i][j] = parseInt(score_mat[j])
+        // }
         
         inputItem1.innerHTML = ' ' + score_string;
 
@@ -283,7 +283,7 @@ function genMatrix() {
         var cell1 = row.insertCell(1);
         cell1.appendChild(inputItem1);
     }
-    groupUser();
+    groupUser(); 
  }
 
  async function storeMatrix() {
@@ -297,11 +297,11 @@ function genMatrix() {
         document.getElementById("message").value = `SET ${name} ${scoreString}`;
         makeRequest();
     }
-    groupUser()
+    groupUser();
  }
 // var map_matrix, matrix;
 // var row_size, col_size;
-function groupUser(){
+async function groupUser(){
     let maxMap = []
     var groupNum = 3;
     let useridx = []
@@ -309,6 +309,20 @@ function groupUser(){
     // console.log(comb)
     // Add the transpose values e.g. matrix[0][1] + matrix[1][]
     // console.log(matrix)
+    var target = document.getElementById("numUsers").value;
+    var name_arr = document.getElementsByName("itemName");
+    
+    for (var i=0; i<name_arr.length; i++) {;
+        var userName = name_arr[i].value;
+        document.getElementById("message").value = `GET ${userName}`;
+        const retrievedScoreString = await makeRequest();
+        var repString = retrievedScoreString.replaceAll(',', '')
+        for (var j=0; j<target; j++){
+            map_matrix[i][j] = 1;
+            matrix[i][j] = parseInt(repString[j])
+        }
+    }
+
     for (var i=0; i<row_size; i++){
         for (var j=i+1; j<col_size; j++){
             matrix[i][j] += matrix[j][i];
