@@ -239,16 +239,27 @@
        }
     }
 }
+var map_matrix, matrix;
+var row_size, col_size;
 
- function genMatrix() {
+function genMatrix() {
     var table = document.getElementById("rankMatrix");
     table.innerHTML = '';
     var target = document.getElementById("numUsers").value;
-    console.log(target)
+    // console.log(target)
     var score_arr = document.getElementsByName("score");
     var name_arr = document.getElementsByName("itemName");
+
+    row_size = target;
+    col_size = target;
+    map_matrix = new Array(row_size); 
+    matrix = new Array(row_size); 
+    for (var i = 0; i < row_size; i++) {
+        matrix[i] = new Array(col_size); 
+        map_matrix[i] = new Array(col_size); 
+    }
     
-     for (var i = 0; i < target; i++) {
+    for (var i = 0; i < target; i++) {
         var inputItem0 = document.createElement('span');
         inputItem0.setAttribute('type', 'text');
         inputItem0.setAttribute('name','userName');
@@ -258,6 +269,12 @@
         inputItem1.setAttribute('type','text');
         inputItem1.setAttribute('name','scores');
         var score_string = score_arr[i].value.replaceAll(',', ' ');
+        var score_mat = score_arr[i].value.replaceAll(',', '');
+        for (var j=0; j<target; j++){
+            map_matrix[i][j] = 1;
+            matrix[i][j] = parseInt(score_mat[j])
+        }
+        
         inputItem1.innerHTML = ' ' + score_string;
 
         var row = table.insertRow(-1);
@@ -265,7 +282,8 @@
         cell0.appendChild(inputItem0);
         var cell1 = row.insertCell(1);
         cell1.appendChild(inputItem1);
-     }
+    }
+    groupUser();
  }
 
  async function storeMatrix() {
@@ -275,12 +293,107 @@
     for (var i=0; i < score_arr.length; i++) {
         var name = name_arr[i].value;
         var scoreString = score_arr[i].value;
-        console.log(name, scoreString);
+        // console.log(name, scoreString);
         document.getElementById("message").value = `SET ${name} ${scoreString}`;
         makeRequest();
     }
+    groupUser()
  }
- 
+// var map_matrix, matrix;
+// var row_size, col_size;
+function groupUser(){
+    let maxMap = []
+    var groupNum = 2;
+
+    makeCombiUtil(col_size-1, 0, groupNum);
+    // console.log(comb)
+    // Add the transpose values e.g. matrix[0][1] + matrix[1][]
+    // console.log(matrix)
+    for (var i=0; i<row_size; i++){
+        for (var j=i+1; j<col_size; j++){
+            matrix[i][j] += matrix[j][i];
+        }
+    }
+
+    for (var i=0; i<comb.length;i++){
+        let s_comb = comb[i]
+        var sum = 0
+        var ptr1 = 0, ptr2=1;
+        while (ptr1 < s_comb.length-1){
+            // console.log(s_comb[ptr1], s_comb[ptr2], matrix[s_comb[ptr1]][s_comb[ptr2]])
+            sum += matrix[s_comb[ptr1]][s_comb[ptr2]]
+            ptr2++
+            if (ptr2 == s_comb.length){
+                ptr1++
+                ptr2 = ptr1+1
+            }
+        }
+        let data = [s_comb, sum];
+        // console.log(data)
+        maxMap.push(data)
+    }
+    console.log("transpose:",matrix)
+    maxMap.sort(compareNumbers)
+    // maxMap2.sort(compareNumbers)
+    console.log(maxMap)
+    // console.log("new:",maxMap2)
+
+    const mat_len = maxMap.length;
+    for (var i=0; i<mat_len; i++) {
+        let data = maxMap.pop();
+        console.log("start process on : ", data)
+        var flag = 1, k;
+        for (var j=0; j<groupNum; j++){
+            k = j+1;
+            if (k==groupNum) k = 0;
+            console.log(data[0][j], data[0][k], map_matrix[data[0][j]][data[0][k]])
+            if (map_matrix[data[0][j]][data[0][k]] == 0){
+                flag = 0;
+                break;
+            }
+        }
+        console.log("flag: ", flag)
+        if (flag == 1){
+            for (var j=0; j<groupNum; j++){
+                for (var k=0; k<col_size; k++){
+                    map_matrix[data[0][j]][k] = 0
+                    map_matrix[k][data[0][j]] = 0
+                }
+            }
+            console.log("group: ", data[0])
+        } else{
+            console.log(data[0], "not picked")
+        }
+    }
+}
+
+function compareNumbers(a, b) {
+    return a[1]-b[1];
+}
+
+var comb = [];
+var tmp = [];
+function makeCombiUtil(n, left, k)
+{
+    // Pushing this vector to a vector of vector
+    if (k == 0) {
+        let cp_tmp = [...tmp]
+        comb.push(cp_tmp);
+        return;
+    }
+
+    // i iterates from left to n. First time
+    // left will be 1
+    for (let i = left; i <= n; ++i)
+    {
+        tmp.push(i);
+        makeCombiUtil(n, i + 1, k - 1);
+        // Popping out last inserted element
+        // from the vector
+        tmp.pop();
+    }
+}
+
  /**
   * check for invalid name or rank in input box
   * send input data to Redis Server
@@ -406,7 +519,7 @@
   */
  function addRow() {
     var target = document.getElementById("numUsers").value;
-    console.log(target)
+    // console.log(target)
     var table = document.getElementById("itemTable");
     // var num_rows = document.getElementById("itemTable").rows.length;
     
@@ -433,7 +546,7 @@
         cell1.appendChild(inputItem1);
         var cell2 = row.insertCell(2);
         cell2.appendChild(inputItem2);
-     }
+      }
      
  }
  
