@@ -303,8 +303,8 @@ function genMatrix() {
 // var row_size, col_size;
 function groupUser(){
     let maxMap = []
-    var groupNum = 2;
-
+    var groupNum = 3;
+    let useridx = []
     makeCombiUtil(col_size-1, 0, groupNum);
     // console.log(comb)
     // Add the transpose values e.g. matrix[0][1] + matrix[1][]
@@ -313,6 +313,7 @@ function groupUser(){
         for (var j=i+1; j<col_size; j++){
             matrix[i][j] += matrix[j][i];
         }
+        useridx.push(i);
     }
 
     for (var i=0; i<comb.length;i++){
@@ -359,12 +360,18 @@ function groupUser(){
                     map_matrix[data[0][j]][k] = 0
                     map_matrix[k][data[0][j]] = 0
                 }
+                let idx = useridx.indexOf(data[0][j])
+                delete useridx[idx]
+                if (useridx.length < numUsers){
+                    break;
+                }
             }
             console.log("group: ", data[0])
         } else{
             console.log(data[0], "not picked")
         }
     }
+    console.log("group: ", useridx)
 }
 
 function compareNumbers(a, b) {
