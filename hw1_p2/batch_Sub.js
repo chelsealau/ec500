@@ -303,15 +303,15 @@ function genMatrix() {
 // var row_size, col_size;
 async function groupUser(){
     let maxMap = []
-    var groupNum = 3;
+    var groupNum = document.getElementById("groupSize").value;
     let useridx = []
     makeCombiUtil(col_size-1, 0, groupNum);
-    // console.log(comb)
+// console.log(comb)
     // Add the transpose values e.g. matrix[0][1] + matrix[1][]
     // console.log(matrix)
     var target = document.getElementById("numUsers").value;
     var name_arr = document.getElementsByName("itemName");
-    
+
     for (var i=0; i<name_arr.length; i++) {;
         var userName = name_arr[i].value;
         document.getElementById("message").value = `GET ${userName}`;
