@@ -352,7 +352,14 @@ async function groupUser(){
     // maxMap2.sort(compareNumbers)
     console.log(maxMap)
     // console.log("new:",maxMap2)
-
+    var group = 0
+    var table = document.getElementById("groupTable");
+    var inputItem0 = document.createElement('span');
+    inputItem0.setAttribute('type', 'text');
+    inputItem0.setAttribute('name','groupnumber');
+    var inputItem1 = document.createElement('span');
+    inputItem1.setAttribute('type', 'text');
+    inputItem1.setAttribute('name','users');
     const mat_len = maxMap.length;
     for (var i=0; i<mat_len; i++) {
         let data = maxMap.pop();
@@ -380,10 +387,31 @@ async function groupUser(){
                     break;
                 }
             }
+            inputItem0.innerHTML = group;
+            for (var k =0; k<groupNum; k++){
+                inputItem1.innerHTML += name_arr[data[0][k]].value
+            }
+            var row = table.insertRow(-1);
+            var cell0 = row.insertCell(0);
+            cell0.appendChild(inputItem0);
+            var cell1 = row.insertCell(1);
+            cell1.appendChild(inputItem1);
+            group++
             console.log("group: ", data[0])
         } else{
             console.log(data[0], "not picked")
         }
+    }
+    if (useridx.length != 0){
+        inputItem0.innerHTML = group;
+        for (var k =0; k<useridx.lengthpNum; k++){
+            inputItem1.innerHTML += name_arr[data[0][k]].value
+        }
+        var row = table.insertRow(-1);
+        var cell0 = row.insertCell(0);
+        cell0.appendChild(inputItem0);
+        var cell1 = row.insertCell(1);
+        cell1.appendChild(inputItem1);
     }
     console.log("group: ", useridx)
 }
@@ -511,10 +539,11 @@ function makeCombiUtil(n, left, k)
      else {
          var status = confirm("Are you ok with the settings?")
          if (status){
-             document.getElementById("setDetails").style.display = "none";
+            //  document.getElementById("setDetails").style.display = "none";
              addRow();
+             window.location.href = "batch_Submission.html";
              document.getElementById("auction_screen").style.display = "contents";
-             location.href = "batch_Submission.html";
+             
             }
             
      }
