@@ -87,12 +87,13 @@
   * check if password is valid
   */
  async function checkLogin() {
+    var pass = document.getElementById("password").value;
+    localStorage.setItem("password", pass);
      let requestRes = await makeRequest();
      if (!(requestRes.includes("ERROR"))) {
          if (document.getElementById("login_screen").style.display == "contents" && requestRes) {
              document.getElementById("login_screen").style.display = "none";
-             document.getElementById("auction_screen").style.display = "contents";
-             document.getElementById("displayName").innerHTML = document.getElementById("WikiName").value;
+             document.getElementById("setDetails").style.display = "contents";
          }
      }
      document.getElementById("fail_login").style.display = "contents";
@@ -131,7 +132,9 @@
   * @returns encrypted password
   */
  function md5(salt) {
-     var inputString = salt + document.getElementById("password").value;
+    //  var inputString = salt + document.getElementById("password").value;
+    var inputString = salt + localStorage.getItem("password");
+    // console.log(inputString);
      var hc="0123456789abcdef";
      function rh(n) {var j,s="";for(j=0;j<=3;j++) s+=hc.charAt((n>>(j*8+4))&0x0F)+hc.charAt((n>>(j*8))&0x0F);return s;}
      function ad(x,y) {var l=(x&0xFFFF)+(y&0xFFFF);var m=(x>>16)+(y>>16)+(l>>16);return (m<<16)|(l&0xFFFF);}
@@ -663,14 +666,16 @@ function makeCombiUtil(comb, tmp, n, left, k)
   */
  // FIX THIS
  function logout(){ 
-     document.getElementById("login_screen").style.display = "contents"
-     document.getElementById("fail_login").style.display = "none";
-     document.getElementById("WikiName").value = ""
-     document.getElementById("password").value = ""
-     document.getElementById('setDetails').style.display = "none";
-     document.getElementById('Auction_screen').style.display = "none";
-     document.getElementById('Results').style.display = "none";
-     document.getElementById('history_screen').style.display = "none";
+    //  document.getElementById("login_screen").style.display = "contents"
+    //  document.getElementById("fail_login").style.display = "none";
+    //  document.getElementById("WikiName").value = ""
+    //  document.getElementById("password").value = ""
+    //  document.getElementById('setDetails').style.display = "none";
+    //  document.getElementById('Auction_screen').style.display = "none";
+    //  document.getElementById('Results').style.display = "none";
+    //  document.getElementById('history_screen').style.display = "none";
+    window.location.href = "findGroupings.html"
+    return;
  }
 
 

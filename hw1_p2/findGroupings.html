@@ -7,13 +7,24 @@
     <title>EC500_HW2</title>
     <link rel="stylesheet" href="main.css">
     <input type="hidden" id="message" value=""/>
-    <input type="hidden" id="password" value="A73397CF210AE"/>
+    <!-- <input type="hidden" id="password" value="A73397CF210AE"/> -->
   </head>
   <body>
     <h1> GROUP AUCTION </h1>   
     <h2> - GROUP 6 - </h2>
-        <div id="setDetails" style="display:contents;">
-          <input type="button" id="groupButton" onclick="groupUser()" value="MAKE GROUPS"/>
+     <div id="login_screen" style="display:contents;">
+            <div id="loginBox">
+              <p>WIKINAME: <input type="text" id="WikiName" placeholder="Enter WikiName"></p> 
+              <p>PASSWORD: <input type="password" id="password" placeholder="Enter password"></p> 
+            <div id="fail_login" style="display:none;">
+                <p>FAILED LOGIN: WRONG PASSWORD</p>
+            </div>
+            <p><input type="button" id="loginButton" onclick="checkLogin()" value="LOGIN"/></p>
+            </div>
+        </div>
+   
+        <div id="setDetails" style="display:none;">
+          <!-- <input type="button" id="groupButton" onclick="groupUser()" value="MAKE GROUPS"/> -->
           <div id="loginBox">
             <p>MAX SUM: <input type="number" id="maxSum" placeholder="Enter max sum"></p> 
             <p>MAX RANK: <input type="number" id="maxRank" placeholder="Enter max rank"></p> 
@@ -37,7 +48,7 @@
                   <th>USERS</th> 
                 </tr>
             </table>
-            <p><input type="button" onclick="logout()" id="logOut" value="LOGOUT"></p>
+            <!-- <p><input type="button" onclick="logout()" id="logOut" value="LOGOUT"></p> -->
         </div> 
   </body>
   <script src="batch_Sub.js"></script> 
