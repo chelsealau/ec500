@@ -38,24 +38,27 @@
   * click SET when KEY ENTER is pressed 
   * while cursor is on input box maxSun
   */
- document.getElementById("maxSum")
-     .addEventListener("keyup", function(event) {
-     event.preventDefault();
-     if (event.keyCode === 13) {
-         document.getElementById("setButton").click();
-     }
- })
+
+//  window.location.href = "findGroupings.html";
+
+//  document.getElementById("maxSum")
+//      .addEventListener("keyup", function(event) {
+//      event.preventDefault();
+//      if (event.keyCode === 13) {
+//          document.getElementById("setButton").click();
+//      }
+//  })
  /**
   * click SET when KEY ENTER is pressed 
   * while cursor is on input box maxRank
   */
- document.getElementById("maxRank")
-     .addEventListener("keyup", function(event) {
-     event.preventDefault();
-     if (event.keyCode === 13) {
-         document.getElementById("setButton").click();
-     }
- })
+//  document.getElementById("maxRank")
+//      .addEventListener("keyup", function(event) {
+//      event.preventDefault();
+//      if (event.keyCode === 13) {
+//          document.getElementById("setButton").click();
+//      }
+//  })
  
  /**
   * attepnt to use the Redis Server with inputed password
@@ -128,7 +131,7 @@
   * @returns encrypted password
   */
  function md5(salt) {
-     var inputString = salt + document.getElementById("password").value 
+     var inputString = salt + document.getElementById("password").value;
      var hc="0123456789abcdef";
      function rh(n) {var j,s="";for(j=0;j<=3;j++) s+=hc.charAt((n>>(j*8+4))&0x0F)+hc.charAt((n>>(j*8))&0x0F);return s;}
      function ad(x,y) {var l=(x&0xFFFF)+(y&0xFFFF);var m=(x>>16)+(y>>16)+(l>>16);return (m<<16)|(l&0xFFFF);}
@@ -180,8 +183,11 @@
      // document.getElementById('sumScore').style.backgroundColor = "#ffffff00";
     var score_arr = document.getElementsByName("score");
     var tot = 0;
+    window.location.href = "findGroupings.html";
     var maxSum = document.getElementById("maxSum").value;
     var numUsers = document.getElementById("numUsers").value;
+    window.location.href = "batch_Submissions.html";
+    document.getElementById("auction_screen").style.display = "contents";
     var max_alert="", empty_alert="", zero_alert="";
 
     for (var i=0; i < score_arr.length; i++) {
@@ -218,6 +224,7 @@
 
     genMatrix();
  }
+
  function sumRank() {
     // document.getElementById('sumScore').style.backgroundColor = "#ffffff00";
    var score_arr = document.getElementsByName("score");
@@ -245,19 +252,20 @@ var row_size, col_size;
 function genMatrix() {
     var table = document.getElementById("rankMatrix");
     table.innerHTML = '';
-    var target = document.getElementById("numUsers").value;
+    // var target = document.getElementById("numUsers").value;
+    var target = localStorage.getItem("numUsers");
     // console.log(target)
     var score_arr = document.getElementsByName("score");
     var name_arr = document.getElementsByName("itemName");
 
-    row_size = target;
-    col_size = target;
-    map_matrix = new Array(row_size); 
-    matrix = new Array(row_size); 
-    for (var i = 0; i < row_size; i++) {
-        matrix[i] = new Array(col_size); 
-        map_matrix[i] = new Array(col_size); 
-    }
+    // row_size = target;
+    // col_size = target;
+    // map_matrix = new Array(row_size); 
+    // matrix = new Array(row_size); 
+    // for (var i = 0; i < row_size; i++) {
+    //     matrix[i] = new Array(col_size); 
+    //     map_matrix[i] = new Array(col_size); 
+    // }
     
     for (var i = 0; i < target; i++) {
         var inputItem0 = document.createElement('span');
@@ -294,23 +302,35 @@ function genMatrix() {
         var scoreString = score_arr[i].value;
         // console.log(name, scoreString);
         document.getElementById("message").value = `SET ${name} ${scoreString}`;
-        makeRequest();
+        await makeRequest();
     }
     groupUser();
-    location.href = "findGroupings.html";
+    // window.location.href = "findGroupings.html";
+    return;
+
  }
 // var map_matrix, matrix;
 // var row_size, col_size;
 async function groupUser(){
     let maxMap = []
-    var groupNum = document.getElementById("groupSize").value;
+    // var groupNum = document.getElementById("groupSize").value;
+    var groupNum = localStorage.getItem("groupSize");
     let useridx = []
     makeCombiUtil(col_size-1, 0, groupNum);
-// console.log(comb)
+    row_size = target;
+    col_size = target;
+    map_matrix = new Array(row_size); 
+    matrix = new Array(row_size); 
+    for (var i = 0; i < row_size; i++) {
+        matrix[i] = new Array(col_size); 
+        map_matrix[i] = new Array(col_size); 
+    }
     // Add the transpose values e.g. matrix[0][1] + matrix[1][]
     // console.log(matrix)
-    var target = document.getElementById("numUsers").value;
+    // var target = document.getElementById("numUsers").value;
+    var target = localStorage.getItem("numUsers");
     var name_arr = document.getElementsByName("itemName");
+    // var name_arr = localStorage.getItem("name_arr");
 
     for (var i=0; i<name_arr.length; i++) {;
         var userName = name_arr[i].value;
@@ -441,6 +461,7 @@ function makeCombiUtil(n, left, k)
         // from the vector
         tmp.pop();
     }
+    return;
 }
 
  /**
@@ -507,12 +528,6 @@ function makeCombiUtil(n, left, k)
  
 
  
- function navDetails() {
-     document.getElementById("menu_screen").style.display = "none";
-     document.getElementById("history_screen").style.display = "none";
-     document.getElementById("setDetails").style.display = "contents";
- }
- 
  /**
   * set max sum of ranks and max value of each individual rank
   * if not inputed, create alert and stay on page
@@ -520,6 +535,9 @@ function makeCombiUtil(n, left, k)
  function setDetail(){
      let maxSum = document.getElementById("maxSum").value;
      let maxRank = document.getElementById("maxRank").value;
+     let numUsers = document.getElementById("numUsers").value;
+     let groupSize = document.getElementById("groupSize").value;
+
      if ((maxSum == "")&&(maxRank == "")){
          alert("ERROR: No Max Sum and Rank")
          return "SET_ERROR";
@@ -540,9 +558,16 @@ function makeCombiUtil(n, left, k)
          var status = confirm("Are you ok with the settings?")
          if (status){
             //  document.getElementById("setDetails").style.display = "none";
-             addRow();
-             window.location.href = "batch_Submission.html";
-             document.getElementById("auction_screen").style.display = "contents";
+            //  window.location.href = `batch_Submissions.html?maxSum=${maxSum}&maxRank=${maxRank}&numUsers=${numUsers}`;
+            localStorage.setItem("numUsers", numUsers);
+            localStorage.setItem("maxSum", maxSum);
+            localStorage.setItem("maxRank", maxRank);
+            localStorage.setItem("groupSize", groupSize);
+            window.location.href = 'batch_Submissions.html';
+            return false;
+            //  document.getElementById("auction_screen").style.display = "contents";
+            //  console.log("ADD ROW REACHED");
+            //  document.getElementById("auction_screen").style.display = "contents";
              
             }
             
@@ -553,9 +578,18 @@ function makeCombiUtil(n, left, k)
   * add row to table in order to insert new choices and their
   */
  function addRow() {
-    var target = document.getElementById("numUsers").value;
-    // console.log(target)
+    // var target = document.getElementById("numUsers").value;
+    // console.log(window.location.href.search);
+    // var urlParams = new URLSearchParams(window.location.href.search);
+    // var params = window.location.search.slice(1).split('&');
+    var target = localStorage.getItem("numUsers");
+    // console.log(target);
+    // console.log(params.get('maxSum'));
+    // var target = urlParams.get('maxSum');
+    // console.log(urlParams.get("maxSum"));
+    // console.log(window.location, document.location);
     var table = document.getElementById("itemTable");
+    table.innerHTML = '';
     // var num_rows = document.getElementById("itemTable").rows.length;
     
      for (var i = 0; i < target; i++) {
@@ -597,7 +631,8 @@ function makeCombiUtil(n, left, k)
  /**
   * logout from website to go to login page
   */
- function logout(){
+ // FIX THIS
+ function logout(){ 
      document.getElementById("login_screen").style.display = "contents"
      document.getElementById("fail_login").style.display = "none";
      document.getElementById("WikiName").value = ""
@@ -607,20 +642,6 @@ function makeCombiUtil(n, left, k)
      document.getElementById('Results').style.display = "none";
      document.getElementById('history_screen').style.display = "none";
  }
- /**
-  * display Auction_screen page and hide Results page
-  */
-  function resultsBack() {
-     document.getElementById('Auction_screen').style.display = "contents";
-     document.getElementById('Results').style.display = "none";
-     document.getElementById('history_screen').style.display = "none";
- }
- /**
-  * display setDetails page and hide Auction_screen page
-  */
- function auctionBack() {
-     document.getElementById('Auction_screen').style.display = "none";
-     document.getElementById("history_screen").style.display = "none";
-     document.getElementById('setDetails').style.display = "contents";
- }
+
+
  

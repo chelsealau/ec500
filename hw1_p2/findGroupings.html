@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EC500_HW2</title>
     <link rel="stylesheet" href="main.css">
+    <input type="hidden" id="message" value=""/>
+    <input type="hidden" id="password" value="A73397CF210AE"/>
   </head>
   <body>
     <h1> GROUP AUCTION </h1>   
     <h2> - GROUP 6 - </h2>
         <div id="setDetails" style="display:contents;">
+          <input type="button" id="groupButton" onclick="groupUser()" value="MAKE GROUPS"/>
           <div id="loginBox">
             <p>MAX SUM: <input type="number" id="maxSum" placeholder="Enter max sum"></p> 
             <p>MAX RANK: <input type="number" id="maxRank" placeholder="Enter max rank"></p> 
@@ -23,7 +26,7 @@
               <p>
                 <input type="number" id="groupSize" placeholder="Enter group size"></p>
               </p>
-            <p><input type="button" id="setButton" onclick="setDetail()" value="SET"/>
+            <p><input type="button" id="setButton" onclick="return setDetail()" value="SET"/>
               <input type="button" onclick="logout()" id="logOut" value="LOGOUT"></p>
           </div> 
         </div> 

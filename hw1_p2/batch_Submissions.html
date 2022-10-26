@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EC500_HW2</title>
     <link rel="stylesheet" href="main.css">
+    <!-- REMOVE HIDDEN PASSWORD PARAMETER -->
+    <input type="hidden" id="message" value=""/>
+    <input type="hidden" id="password" value="A73397CF210AE"/>
   </head>
   <body>
     <h1> GROUP AUCTION </h1>   
@@ -18,7 +21,6 @@
                 <p>FAILED LOGIN: WRONG PASSWORD</p>
             </div>
             <p><input type="button" id="loginButton" onclick="checkLogin()" value="LOGIN"/></p>
-            <input type="hidden" id="message" value=""/>
             </div>
         </div>
     -->
@@ -41,6 +43,7 @@
           </div>  -->
         <div id="auction_screen" style="display:contents;" >
             <p>WikiName: <span type="text" id="displayName"></span></p>
+            <input type="button" id="matNav" onclick="addRow()" value="INPUT MATRIX"/>
             <!-- <p>SUM = <span type="text" id="sumScore">0</span></p> -->
             <p>
                 <table id="itemTable">
@@ -51,7 +54,7 @@
                     </tr>
                 </table>
             </p>
-            <input type="button" onclick="updateSubTotal()" id="showMatrix" value="SHOW MATRIX"/>
+            <!-- <input type="button" onclick="updateSubTotal()" id="showMatrix" value="SHOW MATRIX"/> -->
             <p> 
                 <h2> GENERATED RANKING MATRIX </h2>
                 <table id="rankMatrix" class="center">
@@ -60,8 +63,9 @@
                 </table>
             </p>
             <div>
-            <input type="button" onclick="storeMatrix()" id="saveRanks" value="SUBMIT"/>
-            <input type="button" onclick="auctionBack()" id="auctionBack" value="BACK"> 
+            <input type="button" onclick="return storeMatrix()" id="saveRanks" value="SUBMIT"/>
+            <!-- <input type="button" onclick="auctionBack()" id="auctionBack" value="BACK">  -->
+            <!-- <input type="button" onclick="makeGroups()" id="saveRanks" value="SUBMIT"/> -->
             <input type="button" onclick="logout()" id="logOut" value="LOGOUT">
             </div>
       </div>
