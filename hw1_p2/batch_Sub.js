@@ -228,7 +228,7 @@
  function sumRank() {
     // document.getElementById('sumScore').style.backgroundColor = "#ffffff00";
    var score_arr = document.getElementsByName("score");
-   var maxSum = document.getElementById("maxSum").value;
+   var maxSum = localStorage.getItem("maxSum");
    var tot;
 
    for (var i=0; i < score_arr.length; i++) {
@@ -315,42 +315,49 @@ async function groupUser(){
     let maxMap = []
     // var groupNum = document.getElementById("groupSize").value;
     var groupNum = localStorage.getItem("groupSize");
-    var target = localStorage.getItem("numUsers");
+    var numUsers = localStorage.getItem("numUsers");
     var name_arr = document.getElementsByName("itemName");
-    let useridx = []
-    makeCombiUtil(col_size-1, 0, groupNum);
-    row_size = target;
-    col_size = target;
-    map_matrix = new Array(row_size); 
-    matrix = new Array(row_size); 
+    var useridx = []
+    var comb = [];
+    var tmp = [];
+    makeCombiUtil(comb, tmp, numUsers-1, 0, groupNum);
+    
+    row_size = numUsers;
+    var map_matrix = []; 
+    var matrix = []; 
+    // console.log("original",matrix)
     for (var i = 0; i < row_size; i++) {
-        matrix[i] = new Array(col_size); 
-        map_matrix[i] = new Array(col_size); 
+        matrix.push([]); 
+        map_matrix.push([]); 
     }
     // Add the transpose values e.g. matrix[0][1] + matrix[1][]
     // console.log(matrix)
     // var target = document.getElementById("numUsers").value;
     // var name_arr = localStorage.getItem("name_arr");
-
+    // console.log("original",matrix)
+    // console.log("map_matrix",map_matrix)
     for (var i=0; i<name_arr.length; i++) {;
         var userName = name_arr[i].value;
-        console.log(userName);
+        // console.log(userName);
         document.getElementById("message").value = `GET ${userName}`;
-        const retrievedScoreString = await makeRequest();
+        var retrievedScoreString = await makeRequest();
         var repString = retrievedScoreString.replaceAll(',', '')
-        for (var j=0; j<target; j++){
-            map_matrix[i][j] = 1;
-            matrix[i][j] = parseInt(repString[j])
+        // console.log("repString",repString)
+        for (var j=2; j<repString.length; j++){
+            // console.log(repString[j])
+            map_matrix[i].push(1);
+            matrix[i].push(parseInt(repString[j]))
         }
     }
-
+    console.log("original",matrix)
     for (var i=0; i<row_size; i++){
-        for (var j=i+1; j<col_size; j++){
+        for (var j=i+1; j<row_size; j++){
+            // console.log(i,j,"->",matrix[i][j],"+", matrix[j][i])
             matrix[i][j] += matrix[j][i];
         }
         useridx.push(i);
     }
-
+    console.log("useridx",useridx)
     for (var i=0; i<comb.length;i++){
         let s_comb = comb[i]
         var sum = 0
@@ -371,16 +378,10 @@ async function groupUser(){
     console.log("transpose:",matrix)
     maxMap.sort(compareNumbers)
     // maxMap2.sort(compareNumbers)
-    console.log(maxMap)
+    console.log('maxMap',maxMap)
     // console.log("new:",maxMap2)
     var group = 0
-    var table = document.getElementById("groupTable");
-    var inputItem0 = document.createElement('span');
-    inputItem0.setAttribute('type', 'text');
-    inputItem0.setAttribute('name','groupnumber');
-    var inputItem1 = document.createElement('span');
-    inputItem1.setAttribute('type', 'text');
-    inputItem1.setAttribute('name','users');
+    
     const mat_len = maxMap.length;
     for (var i=0; i<mat_len; i++) {
         let data = maxMap.pop();
@@ -398,35 +399,54 @@ async function groupUser(){
         console.log("flag: ", flag)
         if (flag == 1){
             for (var j=0; j<groupNum; j++){
-                for (var k=0; k<col_size; k++){
+                for (var k=0; k<row_size; k++){
+                    console.log(data[0][j], k, map_matrix[data[0][j]][k])
                     map_matrix[data[0][j]][k] = 0
                     map_matrix[k][data[0][j]] = 0
                 }
+                console.log("map_matrix",map_matrix)
                 let idx = useridx.indexOf(data[0][j])
                 delete useridx[idx]
                 if (useridx.length < numUsers){
                     break;
                 }
             }
+            var table = document.getElementById("groupTable");
+            var inputItem0 = document.createElement('span');
+            inputItem0.setAttribute('type', 'text');
+            inputItem0.setAttribute('name','groupnumber');
+            var inputItem1 = document.createElement('span');
+            inputItem1.setAttribute('type', 'text');
+            inputItem1.setAttribute('name','users');
             inputItem0.innerHTML = group;
             for (var k =0; k<groupNum; k++){
-                inputItem1.innerHTML += name_arr[data[0][k]].value
+                inputItem1.innerHTML += name_arr[data[0][k]].value+" "
             }
             var row = table.insertRow(-1);
             var cell0 = row.insertCell(0);
             cell0.appendChild(inputItem0);
             var cell1 = row.insertCell(1);
             cell1.appendChild(inputItem1);
+            console.log("group", group," : ",data[0])
             group++
-            console.log("group: ", data[0])
+            
         } else{
             console.log(data[0], "not picked")
         }
     }
-    if (useridx.length != 0){
+    if (useridx.length%groupNum != 0){
+        console.log("useridx", useridx)
+        console.log("useridx.leght", useridx.length)
+        var table = document.getElementById("groupTable");
+        var inputItem0 = document.createElement('span');
+        inputItem0.setAttribute('type', 'text');
+        inputItem0.setAttribute('name','groupnumber');
+        var inputItem1 = document.createElement('span');
+        inputItem1.setAttribute('type', 'text');
+        inputItem1.setAttribute('name','users');
         inputItem0.innerHTML = group;
         for (var k =0; k<useridx.lengthpNum; k++){
-            inputItem1.innerHTML += name_arr[data[0][k]].value
+            inputItem1.innerHTML += name_arr[data[0][k]].value + " "
         }
         var row = table.insertRow(-1);
         var cell0 = row.insertCell(0);
@@ -434,22 +454,23 @@ async function groupUser(){
         var cell1 = row.insertCell(1);
         cell1.appendChild(inputItem1);
     }
-    console.log("group: ", useridx)
 }
 
 function compareNumbers(a, b) {
     return a[1]-b[1];
 }
 
-var comb = [];
-var tmp = [];
-function makeCombiUtil(n, left, k)
+// var comb = [];
+// var tmp = [];
+function makeCombiUtil(comb, tmp, n, left, k)
 {
+    // console.log("comb",tmp,n, left,k)
     // Pushing this vector to a vector of vector
     if (k == 0) {
         let cp_tmp = [...tmp]
         comb.push(cp_tmp);
-        return;
+        // console.log(comb)
+        return comb;
     }
 
     // i iterates from left to n. First time
@@ -457,12 +478,12 @@ function makeCombiUtil(n, left, k)
     for (let i = left; i <= n; ++i)
     {
         tmp.push(i);
-        makeCombiUtil(n, i + 1, k - 1);
+        comb = makeCombiUtil(comb, tmp, n, i + 1, k - 1);
         // Popping out last inserted element
         // from the vector
         tmp.pop();
     }
-    return;
+    return comb;
 }
 
  /**
