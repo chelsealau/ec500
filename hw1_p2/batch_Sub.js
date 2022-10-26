@@ -283,7 +283,6 @@ function genMatrix() {
         var cell1 = row.insertCell(1);
         cell1.appendChild(inputItem1);
     }
-    groupUser(); 
  }
 
  async function storeMatrix() {
@@ -298,6 +297,7 @@ function genMatrix() {
         makeRequest();
     }
     groupUser();
+    location.href = "findGroupings.html";
  }
 // var map_matrix, matrix;
 // var row_size, col_size;
@@ -477,24 +477,7 @@ function makeCombiUtil(n, left, k)
      document.getElementById("results").innerHTML = resultString;
  }
  
- async function navHistory() {
-     let name = document.getElementById("WikiName").value;
-     document.getElementById("menu_screen").style.display = "none";
-     document.getElementById("message").value = `GET ${name}`;
-     const requestRes = await makeRequest();
-     
-     try {
-         var jsObject = JSON.parse(requestRes);
-         var resultString = '';
-         for (var key in jsObject) {
-         resultString += key + ' ' + jsObject[key] + "<br />";
-         }
-         document.getElementById("history").innerHTML = resultString;
-     } catch (error) {
-         document.getElementById("history").innerHTML = "NO PREVIOUS SUBMISSION";
-     }
-     document.getElementById("history_screen").style.display = "contents";
- }
+
  
  function navDetails() {
      document.getElementById("menu_screen").style.display = "none";
@@ -531,7 +514,9 @@ function makeCombiUtil(n, left, k)
              document.getElementById("setDetails").style.display = "none";
              addRow();
              document.getElementById("auction_screen").style.display = "contents";
+             location.href = "batch_Submission.html";
             }
+            
      }
  }
  
