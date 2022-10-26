@@ -2,9 +2,10 @@
 ### Members: [Jae Yoon Chung](https://github.com/jcdino) and [Chelsea Lau](https://github.com/chelsealau)
 
 ### Design:
-- **index.html** for structure
+- **batch_Submission.html** html for inputing users and ranks, and print groupings
+- **findGroupings.html** html for details(max sum, max rank, # of users, group size) input
 - **main.css** for design
-- **app.js** for handling the behavior of the interface, involving interaction with the server and update the HTML elements accordingly.
+- **batch_Sub.js** for handling the behavior of the interface, involving interaction with the server and update the HTML elements accordingly.
 
 ### Section:
 - **login** 
@@ -14,15 +15,14 @@
     - set the max rank that can be given to a choice and the max sum of the ranks
     - if max rank is bigger than the max sum, cannot proceed
     - checks for confirmation before preceeding
+    - click button SET to move on
 - **auction**
-    - set a choice with rank
-    - a set of a choice and rank can be created or removed
-    - the most previous auction result can be seen as a reference to the new submission
-    - if rank is higher than max rank, alert user and marks the rank input box red
-    - if sum of ranks is higher than max sum, alert user and marks the sum red
-    - on submission, if choice name or rank is empty alert user the choices that are empty and stays on page
-    - on submission, if the sum of ranks is smaller than the max sum, ask for confirmation to preceed from user 
-    - on submission, send the auction submission to the Redis Server to be stored
-- **confirm submission**
-    - retrive auction submission results from the server to confirm what has been sent
-    - if wrong, go to resubmit
+    - click button INPUT MATRIX to start the input
+    - each row has input for user and ranks given by user
+    - ranks should be inputed with a comma in between
+    - the rank for itself should be input as zero
+    - click button SUBMIT to get grouping
+- **grouping**
+    - creates an array of all the possible groups
+    - group users according to the max sum of ranks
+    - if remaining # of users not fit group size, group the rest together 
