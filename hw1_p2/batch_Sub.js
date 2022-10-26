@@ -315,6 +315,8 @@ async function groupUser(){
     let maxMap = []
     // var groupNum = document.getElementById("groupSize").value;
     var groupNum = localStorage.getItem("groupSize");
+    var target = localStorage.getItem("numUsers");
+    var name_arr = document.getElementsByName("itemName");
     let useridx = []
     makeCombiUtil(col_size-1, 0, groupNum);
     row_size = target;
@@ -328,12 +330,11 @@ async function groupUser(){
     // Add the transpose values e.g. matrix[0][1] + matrix[1][]
     // console.log(matrix)
     // var target = document.getElementById("numUsers").value;
-    var target = localStorage.getItem("numUsers");
-    var name_arr = document.getElementsByName("itemName");
     // var name_arr = localStorage.getItem("name_arr");
 
     for (var i=0; i<name_arr.length; i++) {;
         var userName = name_arr[i].value;
+        console.log(userName);
         document.getElementById("message").value = `GET ${userName}`;
         const retrievedScoreString = await makeRequest();
         var repString = retrievedScoreString.replaceAll(',', '')
