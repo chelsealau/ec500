@@ -445,8 +445,10 @@ async function groupUser(){
         inputItem1.setAttribute('type', 'text');
         inputItem1.setAttribute('name','users');
         inputItem0.innerHTML = group;
-        for (var k =0; k<useridx.lengthpNum; k++){
-            inputItem1.innerHTML += name_arr[data[0][k]].value + " "
+        for (var k =0; k<useridx.length; k++){
+            if (useridx[k]){
+                inputItem1.innerHTML += name_arr[useridx[k]].value + " "
+            }
         }
         var row = table.insertRow(-1);
         var cell0 = row.insertCell(0);
