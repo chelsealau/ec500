@@ -349,7 +349,7 @@ async function groupUser(){
             matrix[i].push(parseInt(repString[j]))
         }
     }
-    console.log("original",matrix)
+    // console.log("original",matrix)
     for (var i=0; i<row_size; i++){
         for (var j=i+1; j<row_size; j++){
             // console.log(i,j,"->",matrix[i][j],"+", matrix[j][i])
@@ -357,7 +357,7 @@ async function groupUser(){
         }
         useridx.push(i);
     }
-    console.log("useridx",useridx)
+    // console.log("useridx",useridx)
     for (var i=0; i<comb.length;i++){
         let s_comb = comb[i]
         var sum = 0
@@ -385,7 +385,7 @@ async function groupUser(){
     const mat_len = maxMap.length;
     for (var i=0; i<mat_len; i++) {
         let data = maxMap.pop();
-        console.log("start process on : ", data)
+        // console.log("start process on : ", data)
         var flag = 1, k;
         for (var j=0; j<groupNum; j++){
             k = j+1;
@@ -404,7 +404,7 @@ async function groupUser(){
                     map_matrix[data[0][j]][k] = 0
                     map_matrix[k][data[0][j]] = 0
                 }
-                console.log("map_matrix",map_matrix)
+                // console.log("map_matrix",map_matrix)
                 let idx = useridx.indexOf(data[0][j])
                 delete useridx[idx]
                 if (useridx.length < numUsers){
@@ -422,17 +422,21 @@ async function groupUser(){
             for (var k =0; k<groupNum; k++){
                 inputItem1.innerHTML += name_arr[data[0][k]].value+" "
             }
+            var inputItem2 = document.createElement('span');
+            inputItem2.setAttribute('type', 'text');
+            inputItem2.setAttribute('name','sum');
+            inputItem2.innerHTML = data[1];
+
             var row = table.insertRow(-1);
             var cell0 = row.insertCell(0);
             cell0.appendChild(inputItem0);
             var cell1 = row.insertCell(1);
             cell1.appendChild(inputItem1);
-            console.log("group", group," : ",data[0])
+            var cell2 = row.insertCell(2);
+            cell2.appendChild(inputItem2);
             group++
             
-        } else{
-            console.log(data[0], "not picked")
-        }
+        } 
     }
     if (useridx.length%groupNum != 0){
         console.log("useridx", useridx)
@@ -441,10 +445,12 @@ async function groupUser(){
         var inputItem0 = document.createElement('span');
         inputItem0.setAttribute('type', 'text');
         inputItem0.setAttribute('name','groupnumber');
+        inputItem0.innerHTML = group;
+
         var inputItem1 = document.createElement('span');
         inputItem1.setAttribute('type', 'text');
         inputItem1.setAttribute('name','users');
-        inputItem0.innerHTML = group;
+        
         for (var k =0; k<useridx.length; k++){
             if (useridx[k]){
                 inputItem1.innerHTML += name_arr[useridx[k]].value + " "
