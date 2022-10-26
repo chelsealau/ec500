@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EC500_HW2</title>
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <h1> GROUP AUCTION </h1>   
+    <h2> - GROUP 6 - </h2>
+        <div id="setDetails" style="display:none;">
+            <div id="loginBox">
+              <p>MAX SUM: <input type="number" id="maxSum" placeholder="Enter max sum"></p> 
+              <p>MAX RANK: <input type="number" id="maxRank" placeholder="Enter max rank"></p> 
+              <p> NUM OF USERS: <input type="number" id="numUsers" placeholder="Enter number of users"></p>
+              <p> NUM OF USERS PER GROUP: <input type="number" id="numUsers" placeholder="User per group"></p>
+              <p><input type="button" id="setButton" onclick="setDetail()" value="SET"/>
+                <input type="button" onclick="logout()" id="logOut" value="LOGOUT"></p>
+            </div> 
+        </div> 
+        <div id="getGroups" style="display:contents;">
+            <table id="groupTable">
+                <tr>
+                  <th>GROUP#</th>
+                  <th>USERS</th> 
+                </tr>
+            </table>
+        </div> 
+  </body>
+  <script src="batch_Sub.js"></script> 
+</html>
